@@ -45,6 +45,7 @@ class Pegawai extends CI_Controller {
 		$data['content'] 	= 'Pegawai/input_laporan_harian';
     $this->load->view('Pegawai/temp_pegawai', $data);
   }
+
 public function listpekerjaan(){
 	// 	$data["jumlah_distribusi"]   = $this->M_Pekerjaan->count_distribusi();
 	// 	$data["jumlah_ipds"]   = $this->M_Pekerjaan->count_ipds();

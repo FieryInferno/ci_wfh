@@ -1,51 +1,49 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php 
+if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 error_reporting(0); //mematikan error
 
 class Awal extends CI_Controller {
 
 	public function __construct()
   {
-			parent::__construct();
-			if ($this->session->id) {
-				switch ($this->session->akses) {
-					case 'admin':
-	          redirect('Admin/Admin');
-	          break;
-	        case 'pegawai':
-	          redirect('Pegawai/Pegawai');
-	          break;
-	        case 'Kepala Seksi':
-	          redirect('KepalaSeksi/KepalaSeksi');
-	          break;
-	        case 'tata_usaha':
-	          redirect('tata_usaha');
-	          break;
+    parent::__construct();
+    if ($this->session->id) {
+      switch ($this->session->akses) {
+        case 'admin':
+          redirect('Admin/Admin');
+          break;
+        case 'pegawai':
+          redirect('Pegawai/Pegawai');
+          break;
+        case 'Kepala Seksi':
+          redirect('KepalaSeksi/KepalaSeksi');
+          break;
+        case 'tata_usaha':
+          redirect('tata_usaha');
+          break;
 
-	        default:
-	          # code...
-	          break;
-				}
-			}
+        default:
+          # code...
+          break;
+      }
+    }
   }
 
-	public function index(){
-		/*if($this->session->userdata('nm_login')){*/
-			//$data=$this->session->userdata('nm_login');
-			//$data['nm_login']	= $data;
-			//$d['bread'] 		= 'Home';
-
-			$this->load->view('login');
-		/*}else{
-			$this->load->view('view');
-		}*/
-
+	public function index()
+  {
+    $this->load->view('login');
 	}
 
-	public function cek_Login(){
+	public function cek_Login()
+  {
 		$username       = $this->input->post('username');
 		$password       = $this->input->post('password');
 		$cnt            = $this->db->get_where('pegawai',array('username'=> $username,'password' => $password))->num_rows();
-		$user           = $this->db->get_where('pegawai', array('username' => $username ))->row_array();
+    $this->db->join('jadwal', 'pegawai.id = jadwal.id_pegawai');
+		$user           = $this->db->get_where('pegawai', [
+      'username'  => $username,
+      'password'  => $password
+    ])->row_array();
 		$this->username = $username ;
     if ($cnt > 0) {
       $_SESSION['id']             = $user['id'];
@@ -59,6 +57,7 @@ class Awal extends CI_Controller {
 			$_SESSION['jenis_kelamin']  = $user['jenis_kelamin'];
 			$_SESSION['alamat']         = $user['alamat'];
 			$_SESSION['foto']           = $user['foto'];
+      $_SESSION['jadwal']         = $user[date('d')];
       switch ($user['akses']) {
         case 'admin':
           redirect('Admin/Admin');
@@ -66,8 +65,8 @@ class Awal extends CI_Controller {
         case 'pegawai':
           redirect('Pegawai/Pegawai');
           break;
-        case 'Kepala Seksi':
-          redirect('KepalaSeksi/KepalaSeksi');
+        case 'kepala_seksi':
+          redirect('kepala_seksi');
           break;
         case 'tata_usaha':
           redirect('tata_usaha');

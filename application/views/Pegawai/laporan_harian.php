@@ -1,4 +1,3 @@
-
 <!-- Content Header (Page header) -->
 <div class="content-header">
   <div class="container-fluid">
@@ -22,7 +21,7 @@
         <div class="row">
           <div class="col">
             <div class="float-left">
-              <a href="<?= base_url()."Pegawai/Pegawai/input_laporan_harian"?> " button type="button" class="btn btn-primary float-left"><i class="fas fa-plus"></i> Tambah Laporan</a>
+              <a href="<?= base_url()."pegawai/laporan_harian/tambah"?> " button type="button" class="btn btn-primary float-left"><i class="fas fa-plus"></i> Tambah Laporan</a>
             </div>
           </div>
         </div>  

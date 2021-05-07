@@ -8,8 +8,15 @@
     <!-- /.card-header -->
     <div class="card-body">
       <?php if ($this->session->status_laporan) echo $this->session->status_laporan; ?>
-      <form role="form" enctype ="multipart/form-data" method="post" action ="<?php echo base_url()."Pegawai/Pegawai/input_laporan_harian";?>">
+      <form role="form" enctype ="multipart/form-data" method="post" action ="<?= base_url(); ?>pegawai/laporan_harian/tambah">
         <div class="row">
+          <div class="col-sm-6">
+            <!-- text input -->
+            <div class="form-group">
+              <label>Jadwal</label>
+              <input type="text" class="form-control" name="jadwal" value="<?= $this->session->jadwal; ?>" readonly>
+            </div>
+          </div>
           <div class="col-sm-6">
             <!-- text input -->
             <div class="form-group">
@@ -41,16 +48,22 @@
               <input type="text" class="form-control" name="pemberi_kerja" placeholder="Pemberi Kerja">
             </div>
           </div>   
-          <div class="row">   
-            <div class="col-6">
-              <input type="submit" name="submit" value="SIMPAN" class="btn-sm btn-primary">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label>Bukti Aktifitas</label>
+              <input type="file" class="form-control" name="bukti" placeholder="Bukti Aktifitas">
             </div>
-            <div class="col-6">
-              <input type="reset"  value="RESET" class="btn-sm btn-danger">
-            </div>
+          </div> 
+        </div>
+        <div class="row">   
+          <div class="col-1">
+            <input type="submit" name="submit" value="SIMPAN" class="btn-sm btn-primary">
           </div>
-        </form>
-      </div>
+          <div class="col-1">
+            <input type="reset"  value="RESET" class="btn-sm btn-danger">
+          </div>
+        </div>
+      </form>
       <!-- /.card-body -->
     </div>
   </div>

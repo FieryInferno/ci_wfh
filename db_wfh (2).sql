@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 17 Apr 2021 pada 08.28
+-- Waktu pembuatan: 08 Bulan Mei 2021 pada 00.09
 -- Versi server: 10.1.32-MariaDB
 -- Versi PHP: 7.2.5
 
@@ -35,8 +35,8 @@ CREATE TABLE `alokasi_pekerjaan` (
   `dari` varchar(100) NOT NULL,
   `bagian` varchar(100) NOT NULL,
   `regional_pekerjaan` varchar(100) NOT NULL,
-  `status` enum('Selesai','Menunggu Verifikasi','Belum Selesai','') NOT NULL,
-  `catatan` text NOT NULL,
+  `status` enum('belum_selesai','menunggu_verifikasi','selesai') NOT NULL,
+  `catatan` text,
   `tanggal` date NOT NULL,
   `hasil` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -46,16 +46,8 @@ CREATE TABLE `alokasi_pekerjaan` (
 --
 
 INSERT INTO `alokasi_pekerjaan` (`id_bekerja`, `nama_pekerjaan`, `nama_pegawai`, `dari`, `bagian`, `regional_pekerjaan`, `status`, `catatan`, `tanggal`, `hasil`) VALUES
-('BK-0001', 'HD (Harga Perdesaan)', 'Sopia Maola Zein', 'Adi Wijaya', 'Kepala Seksi Distribusi', 'Subang', 'Selesai', ' Pastikan pendataan dilakukan dengan baik', '2021-03-01', ''),
-('BK-0005 ', 'HD (Harga Perdesaan)', 'Sopia Maola Zein', 'Adi Wijaya ', ' Kepala Seksi Distribusi', 'Subang', 'Belum Selesai', ' Pastikan pendataan dilakukan dengan baik', '2021-04-01', ''),
-('BK-0006 ', 'HPS (Harga Produsen)', 'Adhi Candra', 'Adi Wijaya ', ' Kepala Seksi Distribusi', 'Binong', 'Belum Selesai', ' Pastikan pendataan dilakukan dengan baik', '2021-04-01', ''),
-('BK-0007 ', 'HPG (Harga Produsen Gabah)', 'Adhi Candra', 'Adi Wijaya ', ' Kepala Seksi Distribusi', 'Subang', 'Belum Selesai', ' Pastikan pendataan dilakukan dengan baik', '2021-04-01', ''),
-('BK-0008 ', 'HPG (Harga Produsen Gabah)', 'Sopia Maola Zein', 'Adi Wijaya ', ' Kepala Seksi Distribusi', 'Binong', 'Belum Selesai', ' Pastikan pendataan dilakukan dengan baik', '2021-04-01', ''),
-('BK-0009 ', 'HD (Harga Perdesaan)', 'Pani Sri Mulyani', 'Adi Wijaya ', ' Kepala Seksi Distribusi', 'Binong', 'Belum Selesai', ' Pastikan pendataan dilakukan dengan baik', '2021-04-01', ''),
-('BK-0010 ', 'HD (Harga Perdesaan)', 'Adhi Candra', 'Adi Wijaya ', ' Kepala Seksi Distribusi', 'Binong', 'Belum Selesai', ' Pastikan pendataan dilakukan dengan baik', '2021-04-01', ''),
-('BK-0011 ', 'HD (Harga Perdesaan)', 'Sopia Maola Zein', 'Adi Wijaya ', ' Kepala Seksi Distribusi', 'Binong', 'Belum Selesai', ' Pastikan pendataan dilakukan dengan baik', '2021-04-01', ''),
-('BK-0012 ', 'HD (Harga Perdesaan)', 'Pani Sri Mulyani', 'Adi Wijaya ', ' Kepala Seksi Distribusi', 'Binong', 'Belum Selesai', ' Pastikan pendataan dilakukan dengan baik', '2021-04-12', ''),
-('BK-0013 ', 'HD (Harga Perdesaan)', 'Pani Sri Mulyani', 'Adi Wijaya ', ' Kepala Seksi Distribusi', 'Subang', 'Belum Selesai', ' Pastikan pendataan dilakukan dengan baik', '2021-04-12', '');
+('BK-0001', 'HD (Harga Perdesaan)', '82', '84', 'Kepala Seksi Distribusi', '1', 'belum_selesai', ' Pastikan pendataan dilakukan dengan baik', '2021-05-09', ''),
+('BK-0002', 'HD (Harga Perdesaan)', '82', '84', ' Kepala Seksi Distribusi', '2', 'belum_selesai', NULL, '2021-05-10', '');
 
 -- --------------------------------------------------------
 
@@ -233,17 +225,17 @@ CREATE TABLE `laporan_pekerjaan` (
   `pemberi_kerja` varchar(100) NOT NULL,
   `status` varchar(100) NOT NULL,
   `waktu` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `id_pegawai` varchar(191) NOT NULL
+  `id_pegawai` varchar(191) NOT NULL,
+  `jadwal` enum('wfh','wfo') NOT NULL,
+  `bukti` varchar(191) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `laporan_pekerjaan`
 --
 
-INSERT INTO `laporan_pekerjaan` (`id_aktivitas`, `nama_aktivitas`, `satuan`, `volume`, `durasi`, `pemberi_kerja`, `status`, `waktu`, `id_pegawai`) VALUES
-(2, 'a', 'a', 0, 'a', 'a', 'terlambat', '2021-04-08 13:50:15', '82'),
-(3, 'Membuka aplikasi absensi', 'aplikasi', 2, '30 menit', 'Kepala Sub Bagian Tata Usaha', 'terlambat', '2021-04-08 14:59:38', '82'),
-(4, 'Membuka aplikasi absensi', 'aplikasi', 2, '30 menit', 'Kepala Sub Bagian Tata Usaha', 'tepat_waktu', '2021-04-09 01:41:23', '82');
+INSERT INTO `laporan_pekerjaan` (`id_aktivitas`, `nama_aktivitas`, `satuan`, `volume`, `durasi`, `pemberi_kerja`, `status`, `waktu`, `id_pegawai`, `jadwal`, `bukti`) VALUES
+(5, 'Membuat aplikasi absensi', '1', 1, '1', 'a', 'tepat_waktu', '2021-04-26 04:06:50', '82', 'wfh', 'document.pdf');
 
 -- --------------------------------------------------------
 
@@ -264,18 +256,19 @@ CREATE TABLE `pegawai` (
   `username` varchar(20) NOT NULL,
   `password` varchar(20) NOT NULL,
   `akses` varchar(20) NOT NULL,
-  `foto` varchar(100) NOT NULL
+  `foto` varchar(100) NOT NULL,
+  `email` varchar(191) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `pegawai`
 --
 
-INSERT INTO `pegawai` (`nip`, `nama`, `jenis_kelamin`, `alamat`, `tempatlahir`, `tanggallahir`, `jabatan`, `namagolongan`, `id`, `username`, `password`, `akses`, `foto`) VALUES
-('7678', 'Pani Sri Mulyani', 'Perempuan', 'Blok Kaum, Kelurahan Cigadung Subang', 'Jakarta', '2021-04-01', 'Koordinator ', '1/B (Juru Muda Tingk', 1, 'panismy', 'pani1234', 'admin', 'pani.jpg'),
-('7677', 'Sopia Maola Zein', 'Perempuan', 'Blok Dangdeur, Subang', 'Subang', '2021-04-10', 'Kepala BPS', '1/A (Juru Muda)', 82, 'sopia', 'sopiazein', 'pegawai', 'avatar51.png'),
-('12111090', 'Adhi Candra', 'Laki-laki', 'Subang', 'Subang', '2021-04-07', 'KSK', 'I/A (Juru Muda) ', 83, 'admin01', 'zezen', 'tata_usaha', 'Daftar_Pekerjaan.png'),
-('7678', 'Adi Wijaya', 'Perempuan', 'Subang', 'Subang', '2021-04-06', 'Kepala Seksi Distribusi', 'IV/C (Pembina Utama ', 84, 'kasi', 'kasi', 'Kepala Seksi', 'Daftar_Pekerjaan1.png');
+INSERT INTO `pegawai` (`nip`, `nama`, `jenis_kelamin`, `alamat`, `tempatlahir`, `tanggallahir`, `jabatan`, `namagolongan`, `id`, `username`, `password`, `akses`, `foto`, `email`) VALUES
+('7678', 'Pani Sri Mulyani', 'Perempuan', 'Blok Kaum, Kelurahan Cigadung Subang', 'Jakarta', '2021-04-01', 'Koordinator ', '1/B (Juru Muda Tingk', 1, 'panismy', 'pani1234', 'admin', 'pani.jpg', '0'),
+('7677', 'Sopia Maola Zein', 'Perempuan', 'Blok Dangdeur, Subang', 'Subang', '2021-04-10', 'Kepala BPS', '1/A (Juru Muda)', 82, 'sopia', 'sopiazein', 'pegawai', 'avatar51.png', '0'),
+('12111090', 'Adhi Candra', 'Laki-laki', 'Subang', 'Subang', '2021-04-07', 'KSK', 'I/A (Juru Muda) ', 83, 'admin01', 'zezen', 'tata_usaha', 'Daftar_Pekerjaan.png', '0'),
+('7678', 'Adi Wijaya', 'Perempuan', 'Subang', 'Subang', '2021-04-06', 'Kepala Seksi Distribusi', 'IV/C (Pembina Utama ', 84, 'kasi', 'kasi', 'kepala_seksi', 'Daftar_Pekerjaan1.png', 'panisrimulyani22@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -416,7 +409,7 @@ ALTER TABLE `jadwal`
 -- AUTO_INCREMENT untuk tabel `laporan_pekerjaan`
 --
 ALTER TABLE `laporan_pekerjaan`
-  MODIFY `id_aktivitas` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_aktivitas` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `pegawai`
