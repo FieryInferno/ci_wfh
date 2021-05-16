@@ -10,8 +10,11 @@ $route['tata_usaha/jadwal']           = 'Tata_usaha/Jadwal';
 $route['tata_usaha/jadwal/generate']  = 'Tata_usaha/Jadwal/generate';
 $route['tata_usaha/jadwal/cetak']     = 'Tata_usaha/Jadwal/cetak';
 
+$route['pegawai']                       = 'Pegawai/Pegawai';
 $route['pegawai/laporan_harian']        = 'Pegawai/Pegawai/laporan_harian';
 $route['pegawai/laporan_harian/tambah'] = 'Pegawai/Pegawai/input_laporan_harian';
+$route['pegawai/list_pekerjaan']        = 'Pegawai/Pegawai/listpekerjaan';
+$route['pegawai/input_hasil']           = 'Pegawai/Pegawai/input_hasil';
 
 $route['kepala_seksi']                        = 'KepalaSeksi/KepalaSeksi';
 $route['kepala_seksi/alokasi_pekerjaan']      = 'KepalaSeksi/AlokasiPekerjaan';

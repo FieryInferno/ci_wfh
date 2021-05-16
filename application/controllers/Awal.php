@@ -63,7 +63,7 @@ class Awal extends CI_Controller {
           redirect('Admin/Admin');
           break;
         case 'pegawai':
-          redirect('Pegawai/Pegawai');
+          redirect('pegawai');
           break;
         case 'kepala_seksi':
           redirect('kepala_seksi');

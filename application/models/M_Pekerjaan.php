@@ -47,10 +47,9 @@ class M_Pekerjaan extends CI_Model {
 	}
 	
 	public function get_pekerjaanpegawai(){
-    $this->db->select('*');
-    $this->db->from('alokasi_pekerjaan');
-    $this->db->where('nama_pegawai', $_SESSION[nama]);
-    return $this->db->get()->result();
+    return $this->db->get_where('alokasi_pekerjaan', [
+      'nama_pegawai'  => $this->session->id
+    ])->result();
   }
 
   public function get_pekerjaankepalaseksi(){

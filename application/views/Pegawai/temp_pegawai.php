@@ -120,7 +120,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="<?php echo base_url()."index.php/Pegawai/Pegawai/listpekerjaan"?>" class="nav-link">
+              <a href="<?php echo base_url()."pegawai/list_pekerjaan"?>" class="nav-link">
                 <i class="nav-icon fas fa-edit" style="color :#339af0;"></i>
                 <p>
                   List Pekerjaan
