@@ -67,10 +67,10 @@
                       <a class="btn btn-sm btn-warning" href="<?= base_url('kepala_seksi/pekerjaan/edit/' . $row->id_pekerjaan); ?>" title="Edit">
                         <li class="fa fa-pencil-alt" style="color : ;"></li>
                       </a>
-                      <a class="btn btn-sm btn-primary" href="lihat_pekerjaan/<?php echo $row->id_pekerjaan ?> "  title="Lihat">
+                      <a class="btn btn-sm btn-primary" href="<?= base_url('kepala_seksi/pekerjaan/lihat/' . $row->id_pekerjaan); ?>" title="Lihat">
                         <li class="fa fa-eye" ></li>
                       </a> 
-                      <a class="btn btn-sm btn-danger" href="hapus_jabatan/<?php echo $row->id ?> "  onClick="return confirm('Apakah anda yakin ingin menghapus data jabatan dengan id : <?php echo $row->id ?>');" title="Hapus">
+                      <a class="btn btn-sm btn-danger" href="<?= base_url('kepala_seksi/pekerjaan/hapus/' . $row->id_pekerjaan); ?>" onClick="return confirm('Apakah anda yakin ingin menghapus data pekerjaan : <?php echo $row->nama_pekerjaan ?>');" title="Hapus">
                         <li class="fa fa-trash" style="color : ;"></li>
                       </a> 
                     </td>

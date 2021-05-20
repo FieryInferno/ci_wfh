@@ -59,10 +59,9 @@ class M_Pekerjaan extends CI_Model {
   }
 
   public function get_detailpekerjaan($id_pekerjaan){
-    $this->db->select('*');
-    $this->db->from('detail_pekerjaan');
-    $this->db->where('id_pekerjaan', $id_pekerjaan);
-    return $this->db->get()->result();
+    return $this->db->get_where('detail_pekerjaan', [
+      'id_pekerjaan'  => $id_pekerjaan
+    ])->result();
   }
 
   function idpekerjaan(){
@@ -110,5 +109,10 @@ class M_Pekerjaan extends CI_Model {
     return $this->db->get_where('pekerjaan', [
       'id_pekerjaan'  => $id_pekerjaan
     ])->row_array();
+  }
+
+  public function delete($table, $where)
+  {
+    $this->db->delete($table, $where);
   }
 }

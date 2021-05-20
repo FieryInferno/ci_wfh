@@ -118,4 +118,60 @@ class Pekerjaan extends CI_Controller {
 		$data['content']  = 'KepalaSeksi/editPekerjaan';
 		$this->load->view('KepalaSeksi/temp_kepalaseksi',$data);
   }
+
+  public function lihat($id_pekerjaan)
+  {
+    $data['detail_pekerjaan'] = $this->M_Pekerjaan->get_detailpekerjaan($id_pekerjaan);
+    $data['content']          = 'KepalaSeksi/v_lihatpekerjaan';
+    $data['id_pekerjaan']     = $id_pekerjaan;
+    $this->load->view('KepalaSeksi/temp_kepalaseksi', $data);
+  }
+
+  public function editSubPekerjaan($id_kegiatan)
+  {
+    $data = [
+      'nama_kegiatan' => $this->input->post('nama_kegiatan')
+    ];
+    $where  = [
+      'id_kegiatan' => $id_kegiatan
+    ];
+    $this->M_Pekerjaan->Updatedata('detail_pekerjaan', $data, $where);
+    $this->session->set_flashdata('pesan', '
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Sukses!</strong> Berhasil Edit Sub Pekerjaan.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    ');
+    redirect('kepala_seksi/pekerjaan/lihat/' . $this->input->post('id_pekerjaan'));
+  }
+
+  public function hapusSubPekerjaan($id_pekerjaan, $id_kegiatan)
+  {
+    $this->M_Pekerjaan->delete('detail_pekerjaan', ['id_kegiatan' => $id_kegiatan]);
+    $this->session->set_flashdata('pesan', '
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Sukses!</strong> Berhasil Edit Sub Pekerjaan.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    ');
+    redirect('kepala_seksi/pekerjaan/lihat/' . $this->input->post('id_pekerjaan'));
+  }
+
+  public function hapus($id_pekerjaan)
+  {
+    $this->M_Pekerjaan->delete('pekerjaan', ['id_pekerjaan' => $id_pekerjaan]);
+    $this->session->set_flashdata('pesan', '
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Sukses!</strong> Berhasil Hapus Pekerjaan.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    ');
+    redirect('kepala_seksi/pekerjaan.html');
+  }
 }
