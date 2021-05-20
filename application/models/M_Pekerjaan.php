@@ -53,10 +53,9 @@ class M_Pekerjaan extends CI_Model {
   }
 
   public function get_pekerjaankepalaseksi(){
-    $this->db->select('*');
-    $this->db->from('pekerjaan');
-    $this->db->where('bagian', $_SESSION[jabatan]);
-    return $this->db->get()->result();
+    return $this->db->get_where('pekerjaan', [
+      'bagian'  => $this->session->jabatan
+    ])->result();
   }
 
   public function get_detailpekerjaan($id_pekerjaan){
@@ -67,9 +66,9 @@ class M_Pekerjaan extends CI_Model {
   }
 
   function idpekerjaan(){
-		$q      = $this->db->query("select MAX(id_pekerjaan) as idpekerjaan from pekerjaan");
-    $hasil  = $q->row();
-    return $hasil->idpekerjaan;
+    $this->db->select_max('no_urut');
+    $hasil  = $this->db->get('pekerjaan')->row();
+    return $hasil->no_urut;
 	}
 
 	function idbekerja(){
@@ -92,10 +91,9 @@ class M_Pekerjaan extends CI_Model {
     ])->result();
   }
 
-  public function Updatedata($tableName,$data,$where)
+  public function Updatedata($tableName, $data, $where)
 	{
-		$res  = $this->db->update($tableName,$data, $where);
-		return $res ;
+		return $this->db->update($tableName, $data, $where);
   }
 
   public function cekPekerjaanPegawai()
@@ -104,6 +102,13 @@ class M_Pekerjaan extends CI_Model {
       'nama_pegawai'  => $this->input->post('id_pegawai'),
       'tanggal'       => $this->input->post('tanggal'),
       'status'        => 'belum_selesai'
+    ])->row_array();
+  }
+
+  public function get($id_pekerjaan)
+  {
+    return $this->db->get_where('pekerjaan', [
+      'id_pekerjaan'  => $id_pekerjaan
     ])->row_array();
   }
 }

@@ -16,6 +16,10 @@ $route['pegawai/laporan_harian/tambah'] = 'Pegawai/Pegawai/input_laporan_harian'
 $route['pegawai/list_pekerjaan']        = 'Pegawai/Pegawai/listpekerjaan';
 $route['pegawai/input_hasil']           = 'Pegawai/Pegawai/input_hasil';
 
-$route['kepala_seksi']                        = 'KepalaSeksi/KepalaSeksi';
-$route['kepala_seksi/alokasi_pekerjaan']      = 'KepalaSeksi/AlokasiPekerjaan';
-$route['kepala_seksi/cek_pekerjaan_pegawai']  = 'KepalaSeksi/AlokasiPekerjaan/cekPekerjaanPegawai';
+$route['kepala_seksi']                                    = 'KepalaSeksi/KepalaSeksi';
+$route['kepala_seksi/alokasi_pekerjaan']                  = 'KepalaSeksi/AlokasiPekerjaan';
+$route['kepala_seksi/cek_pekerjaan_pegawai']              = 'KepalaSeksi/AlokasiPekerjaan/cekPekerjaanPegawai';
+$route['kepala_seksi/pekerjaan.html']                     = 'KepalaSeksi/Pekerjaan';
+$route['kepala_seksi/pekerjaan/tambah.html']              = 'KepalaSeksi/Pekerjaan/tambah';
+$route['kepala_seksi/pekerjaan/input_sub_pekerjaan.html'] = 'KepalaSeksi/Pekerjaan/inputSubPekerjaan';
+$route['kepala_seksi/pekerjaan/edit/(:any)']              = 'KepalaSeksi/Pekerjaan/edit/$1';

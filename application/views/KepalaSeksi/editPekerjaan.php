@@ -3,12 +3,13 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h3><b><font face=""> Daftar Pekerjaan </font></b></h3>
+          <h3><b><font face=""> Edit Pekerjaan </font></b></h3>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="<?php echo base_url()."Akademik/home_akademik"?>">Home</a></li>
-            <li class="breadcrumb-item active">Daftar Pekerjaan</li>
+            <li class="breadcrumb-item"><a href="<?=base_url(); ?>">Home</a></li>
+            <li class="breadcrumb-item"><a href="<?= base_url(); ?>kepala_seksi/pekerjaan.html">Pekerjaan</a></li>
+            <li class="breadcrumb-item active">Edit Pekerjaan</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
@@ -30,36 +31,29 @@
   <div class="container-fluid">
     <div class="col-sm-12">
       <div class="card">
-        <form role="form" enctype ="multipart/form-data" method= "post" action ="<?= base_url(); ?>kepala_seksi/pekerjaan/tambah.html">
+        <form role="form" enctype ="multipart/form-data" method= "post" action ="<?= base_url('kepala_seksi/pekerjaan/edit/' . $id_pekerjaan); ?>">
           <div class="card-body">
             <div class="row">
               <div class="col-sm-6">
                 <!-- text input -->
                 <div class="form-group">
                   <label style="align-items: : right">Id Pekerjaan</label>
-                  <input type="text" class="form-control" name= "id_pekerjaan" placeholder="id ..." value="PK-<?= sprintf("%04s", $id_pekerjaan); ?>" readonly>
-                  <input type="hidden" name="no_urut" value="<?= $id_pekerjaan; ?>">
+                  <input type="text" class="form-control" name= "id_pekerjaan" placeholder="id ..." value="<?= $id_pekerjaan; ?>" readonly>
                 </div>
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
                   <label>Nama</label>
-                  <input type="text" class="form-control" name="nama_pekerjaan" placeholder="Nama ..." >
+                  <input type="text" class="form-control" name="nama_pekerjaan" placeholder="Nama ..." value="<?= $nama_pekerjaan; ?>">
                 </div>
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
                   <label>Jenis</label>
                   <select name="jenis" class='form-control'>
-                    <option value="Bulanan">Bulanan</option>
-                    <option value="Tahunan">Tahunan</option>
+                    <option value="Bulanan" <?= $jenis == 'Bulanan' ? 'selected' : '' ; ?>>Bulanan</option>
+                    <option value="Tahunan" <?= $jenis == 'Tahunan' ? 'selected' : '' ; ?>>Tahunan</option>
                   </select>
-              </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label></label>
-                  <input type="hidden" class="form-control" rows="3" name="bagian" value = "<?php echo $_SESSION['jabatan'] ?>" placeholder="Alamat ..."></textarea>
-                </div>
               </div>
             </div>
           </div>

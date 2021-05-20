@@ -28,11 +28,7 @@
   <link rel="stylesheet" href="<?php echo base_url();?>assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <!-- Daterange picker -->
   <link rel="stylesheet" href="<?php echo base_url();?>assets/plugins/daterangepicker/daterangepicker.css">
-   <!-- Bootstrap Core CSS -->
- <!-- DataTables CSS -->
-    
-
-  <!-- summernote -->
+  
   <link rel="stylesheet" href="<?php echo base_url();?>assets/plugins/summernote/summernote-bs4.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="<?php echo base_url();?>assets/https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
@@ -117,7 +113,7 @@
             </li>
             
             <li class="nav-item">
-              <a href="<?php echo base_url()."index.php/KepalaSeksi/KepalaSeksi/daftar_pekerjaan"?>" class="nav-link">
+              <a href="<?= base_url(); ?>kepala_seksi/pekerjaan.html" class="nav-link">
                 <i class="nav-icon fas fa-edit" style="color :#339af0;"></i>
                 <p>
                   Daftar Pekerjaan
