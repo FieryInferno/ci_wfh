@@ -10,14 +10,17 @@ $route['tata_usaha/jadwal']           = 'Tata_usaha/Jadwal';
 $route['tata_usaha/jadwal/generate']  = 'Tata_usaha/Jadwal/generate';
 $route['tata_usaha/jadwal/cetak']     = 'Tata_usaha/Jadwal/cetak';
 
-$route['pegawai']                       = 'Pegawai/Pegawai';
-$route['pegawai/laporan_harian']        = 'Pegawai/Pegawai/laporan_harian';
-$route['pegawai/laporan_harian/tambah'] = 'Pegawai/Pegawai/input_laporan_harian';
-$route['pegawai/list_pekerjaan']        = 'Pegawai/Pegawai/listpekerjaan';
-$route['pegawai/input_hasil']           = 'Pegawai/Pegawai/input_hasil';
+$route['pegawai.html']                    = 'Pegawai/Pegawai';
+$route['pegawai/laporan_harian']          = 'Pegawai/Pegawai/laporan_harian';
+$route['pegawai/laporan_harian/tambah']   = 'Pegawai/Pegawai/input_laporan_harian';
+$route['pegawai/pekerjaan.html']          = 'Pegawai/Pekerjaan';
+$route['pegawai/pekerjaan/lihat/(:any)']  = 'Pegawai/Pekerjaan/lihat/$1';
+$route['pegawai/pekerjaan/input_hasil']   = 'Pegawai/Pekerjaan/inputHasil';
+$route['pegawai/input_hasil']             = 'Pegawai/Pegawai/input_hasil';
 
 $route['kepala_seksi']                                            = 'KepalaSeksi/KepalaSeksi';
-$route['kepala_seksi/alokasi_pekerjaan']                          = 'KepalaSeksi/AlokasiPekerjaan';
+$route['kepala_seksi/alokasi_pekerjaan.html']                     = 'KepalaSeksi/AlokasiPekerjaan';
+$route['kepala_seksi/alokasi_pekerjaan/hapus/(:any)']             = 'KepalaSeksi/AlokasiPekerjaan/hapus/$1';
 $route['kepala_seksi/cek_pekerjaan_pegawai']                      = 'KepalaSeksi/AlokasiPekerjaan/cekPekerjaanPegawai';
 $route['kepala_seksi/pekerjaan.html']                             = 'KepalaSeksi/Pekerjaan';
 $route['kepala_seksi/pekerjaan/tambah.html']                      = 'KepalaSeksi/Pekerjaan/tambah';

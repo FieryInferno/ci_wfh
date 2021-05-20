@@ -5,20 +5,15 @@
     <div class="card-header">
       <h3 class="card-title">Form Alokasi</h3>
     </div>
-    <!-- /.card-header -->
     <div class="card-body">
       <form role="form" enctype ="multipart/form-data" method= "post" action ="<?php echo base_url()."index.php/KepalaSeksi/KepalaSeksi/do_alokasipekerjaan";?>">
         <div class="row">
-
-
           <div class="col-sm-6">
-            <!-- text input -->
             <div class="form-group">
               <label style="align-items: : right">Id Alokasi Pekerjaan</label>
               <input type="text" class="form-control" name= "id_bekerja" placeholder="id ..." value="BK-<?php echo sprintf("%04s", $id_bekerja)?> " readonly>
             </div>
           </div>
-          
           <div class="col-sm-6">
             <div class="form-group">
               <label>Pegawai</label>

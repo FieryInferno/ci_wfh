@@ -26,6 +26,7 @@
                   <th>No</th>       
                   <th>Nama</th>
                   <th>Lokasi</th>
+                  <th>Progress</th>
                   <th>Status</th>
                   <th>Tanggal</th>
                   <th>Aksi</th>
@@ -37,55 +38,29 @@
                   foreach ($pekerjaan as $row) { ?>
                     <tr>
                       <td><?php echo $no++ ?></td>
-                      <td><?php echo $row->nama_pekerjaan?></td>
-                      <td><?php echo $row->regional_pekerjaan?></td>
+                      <td><?php echo $row['nama_pekerjaan']; ?></td>
+                      <td><?php echo $row['lokasi']; ?></td>
+                      <td><?php echo $row['progress']; ?> %</td>
                       <td>
-                        <?php if($row->status == "menunggu_verifikasi") { ?>
-                          <span class="badge badge-danger">Menunggu Verifikasi</span>
-                        <?php } elseif ($row->status == "belum_selesai") { ?>
-                          <span class="badge badge-warning" style="color:red;">Belum Selesai</span>
+                        <?php if($row['status'] == "menunggu_verifikasi") { ?>
+                          <span class="badge badge-warning">Menunggu Verifikasi</span>
+                        <?php } elseif ($row['status'] == "belum_selesai") { ?>
+                          <span class="badge badge-danger" style="color:red;">Belum Selesai</span>
                         <?php } else { ?>
                           <span class="badge badge-success">Selesai</span>
                         <?php } ?>
                       </td>
-                      <td><?php echo $row->tanggal?></td>
+                      <td><?php echo $row['tanggal']; ?></td>
                       <td>
-                        <a href ="" type="button" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Lihat</a>
-                        <a href ="" type="button" data-toggle="modal" data-target="#ModalEdit<?php echo $row->id_bekerja;?>" class="btn btn-primary btn-xs badge-success"><i class="fa fa-upload"></i> Submit</a>
-                        <div class="modal fade" id="ModalEdit<?php echo $row->id_bekerja;?>">
-                          <div class="modal-dialog">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h4 class="modal-title">Hasil Pekerjaan</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                                </button>
-                              </div>
-                              <div class="modal-body">
-                                <div class="card-body">
-                                  <form role="form"  enctype ="multipart/form-data" method= "post" action ="<?php echo base_url()."pegawai/input_hasil";?>">
-                                    <div class="row">
-                                      <div class="col-sm-12">
-                                        <div class="form-group">
-                                          <label>Hasil Pekerjaan</label>
-                                          <input type="file" class="form-control" name="hasil" required="required" />
-                                          <input type="hidden" class="form-control" name="id_bekerja" value = "<?php echo $row->id_bekerja;?> " required="required" />
-                                        </div>
-                                      </div>
-                                    </div>     
-                                </div>
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Simpan</button> 
-                                  </form>   
-                              </div>
-                            </div>
-                            <!-- /.modal-content -->
-                          </div>
-                        </div>
+                        <a href ="<?= base_url('pegawai/pekerjaan/lihat/' . $row['id_bekerja']); ?>" type="button" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Lihat</a>
                       </td>
                     </tr>
                 <?php } ?>
               </tbody>
             </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

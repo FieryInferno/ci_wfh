@@ -47,9 +47,16 @@ class M_Pekerjaan extends CI_Model {
 	}
 	
 	public function get_pekerjaanpegawai(){
-    return $this->db->get_where('alokasi_pekerjaan', [
+    $this->db->join('regional_pekerjaan', 'alokasi_pekerjaan.regional_pekerjaan = regional_pekerjaan.id_regional');
+    $this->db->join('pekerjaan', 'alokasi_pekerjaan.nama_pekerjaan = pekerjaan.id_pekerjaan');
+    $data = $this->db->get_where('alokasi_pekerjaan', [
       'nama_pegawai'  => $this->session->id
-    ])->result();
+    ])->result_array();
+    for ($i=0; $i < count($data); $i++) {
+      $key  = $data[$i];
+      $data[$i]['progress'] = $this->hitungPersenPekerjaan($key['id_bekerja']) * 100;
+    }
+    return $data;
   }
 
   public function get_pekerjaankepalaseksi(){
@@ -64,16 +71,16 @@ class M_Pekerjaan extends CI_Model {
     ])->result();
   }
 
-  function idpekerjaan(){
+  function idpekerjaan() {
     $this->db->select_max('no_urut');
     $hasil  = $this->db->get('pekerjaan')->row();
     return $hasil->no_urut;
 	}
 
-	function idbekerja(){
-		$q      = $this->db->query("select MAX(id_bekerja) as id_bekerja from alokasi_pekerjaan");
-    $hasil  = $q->row();
-    return $hasil->id_bekerja;
+	function idbekerja() {
+    $this->db->select_max('no_urut');
+    $hasil  = $this->db->get('alokasi_pekerjaan')->row();
+    return $hasil->no_urut;
 	}
 	
 	public function Insertdata($tableName,$data)
@@ -85,6 +92,8 @@ class M_Pekerjaan extends CI_Model {
 	public function getalokasikasi(){
     $this->db->join('pegawai', 'alokasi_pekerjaan.nama_pegawai = pegawai.id');
     $this->db->join('regional_pekerjaan', 'alokasi_pekerjaan.regional_pekerjaan = regional_pekerjaan.id_regional');
+    $this->db->join('pekerjaan', 'alokasi_pekerjaan.nama_pekerjaan = pekerjaan.id_pekerjaan');
+    $this->db->select('alokasi_pekerjaan.tanggal, pekerjaan.nama_pekerjaan, pegawai.nama, regional_pekerjaan.lokasi, alokasi_pekerjaan.status, alokasi_pekerjaan.id_bekerja');
     return $this->db->get_where('alokasi_pekerjaan', [
       'dari'  => $this->session->id 
     ])->result();
@@ -114,5 +123,30 @@ class M_Pekerjaan extends CI_Model {
   public function delete($table, $where)
   {
     $this->db->delete($table, $where);
+  }
+
+  public function getDetailAlokasiPekerjaan($id_bekerja)
+  {
+    $this->db->join('alokasi_pekerjaan', 'detail_pekerjaan.id_pekerjaan = alokasi_pekerjaan.nama_pekerjaan');
+    $this->db->select('detail_pekerjaan.*');
+    return $this->db->get_where('detail_pekerjaan', [
+      'alokasi_pekerjaan.id_bekerja'  => $id_bekerja
+    ])->result_array();
+  }
+
+  public function hitungPersenPekerjaan($id_bekerja)
+  {
+    $this->db->join('alokasi_pekerjaan', 'detail_pekerjaan.id_pekerjaan = alokasi_pekerjaan.nama_pekerjaan');
+    $this->db->select('detail_pekerjaan.*');
+    $data = $this->db->get_where('detail_pekerjaan', [
+      'id_bekerja'  => $id_bekerja 
+    ])->result_array();
+    $belumSelesai = array_count_values(array_column($data, 'hasil'))['0'];
+    if ($belumSelesai) {
+      $selesai  = count($data) - $belumSelesai;
+    } else {
+      $selesai      = count($data);
+    }
+    return $selesai / count($data);
   }
 }

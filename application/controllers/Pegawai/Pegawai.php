@@ -46,55 +46,6 @@ class Pegawai extends CI_Controller {
     $this->load->view('Pegawai/temp_pegawai', $data);
   }
 
-  public function listpekerjaan() {
-		$data['content']    = 'Pegawai/v_pekerjaan';
-		$data['pekerjaan']  = $this->M_Pekerjaan->get_pekerjaanpegawai();
-		$this->load->view('Pegawai/temp_pegawai',$data);
-	}
-
-	public function input_hasil() {
-    $id     = $_POST['id_bekerja'];
-    $status = $_POST['status'];
-		$hasil  = $_FILES['hasil'];
-    if ($hasil) {
-      $config['upload_path']    = './assets/file_pekerjaan/';
-      $config['allowed_types']  = 'docx|xls|pdf';
-      $this->upload->initialize($config);
-      if(!$this->upload->do_upload('hasil')){
-        print_r($this->upload->display_errors()); die();
-      }else{
-        $foto = $this->upload->data('file_name');
-      }
-    }
-    $data = [
-      'hasil'   => $foto,
-      'status'  => 'menunggu_verifikasi'
-    ];
-		$where  = ['id_bekerja'  => $id];
-		$res    = $this->M_Pekerjaan->Updatedata('alokasi_pekerjaan', $data, $where);
-		if ($res >= 1){
-      $this->session->set_flashdata('pesan', '
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-          <strong>Sukses!</strong> Berhasil input hasil pekerjaan.
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-      ');
-      redirect('pegawai/list_pekerjaan');
-    }else {
-      $this->session->set_flashdata('pesan', '
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-          <strong>Gagal!</strong> Gagal input hasil pekerjaan.
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-      ');
-      redirect('pegawai/list_pekerjaan');
-    }
-  }
-
 	public function jadwal()
 	{
 		$data['content']	= 'Pegawai/jadwal';

@@ -71,11 +71,8 @@
                     ?>
                   </td>
                   <td>
-                    <a href="verifikasi_pekerjaan/<?php echo $row->id_bekerja ?>" title="">
-                      <li class="fa fa-pencil-checklist" style="color: green;"></li>
-                    </a>
-                    <a href="lihat_alokasi/<?php echo $row->id_bekerja ?> "  onClick="return confirm('Apakah anda yakin ingin menghapus data golongan dengan id : <?php echo $row->id ?>');" title="">
-                      <li class="fa fa-eye" > </li>
+                    <a href="<?= base_url('kepala_seksi/alokasi_pekerjaan/hapus/' . $row->id_bekerja); ?>" onClick="return confirm('Apakah anda yakin ingin menghapus data golongan dengan id : <?php echo $row->id_bekerja ?>');" title="Hapus" class="btn btn-danger btn-sm">
+                      <li class="fa fa-trash"></li>
                     </a> 
                   </td>
                 </tr>
@@ -94,7 +91,7 @@
               </div>
               <div class="modal-body">
                 <div class="card-body">
-                  <form role="form" method= "post" action ="<?= base_url(); ?>kepala_seksi/alokasi_pekerjaan">
+                  <form role="form" method= "post" action ="<?= base_url(); ?>kepala_seksi/alokasi_pekerjaan.html">
                     <div class="row">
                       <div class="col-sm-6">
                         <!-- text input -->
@@ -107,7 +104,7 @@
                         <div class="form-group">
                           <label>Pegawai</label>
                           <select name="nama_pegawai" class='form-control' id="pegawai">
-                          <option>Pilih Pegawai</option>
+                            <option>Pilih Pegawai</option>
                             <?php 
                               $sql  = $this->db->get('pegawai');
                               foreach ($sql->result() as $key => $value) { ?>
@@ -125,20 +122,13 @@
                             <?php 
                               $sql  = $this->db->get_where('pekerjaan', array('bagian' => $_SESSION[jabatan]));
                               foreach ($sql->result() as $key => $value) { ?>
-                                <option value='<?php echo $value->nama_pekerjaan ?>'><?php echo $value->nama_pekerjaan ?> </option>
+                                <option value='<?php echo $value->id_pekerjaan ?>'><?php echo $value->nama_pekerjaan ?> </option>
                               <?php }
                             ?>
                           </select>
                         </div>
                       </div>
                       <br>
-                      <div class="col-sm-6">
-                        <!-- text input -->
-                        <div class="form-group">
-                          <label style="align-items: : right">Dari</label>
-                          <input type="text" class="form-control" name= "dari" placeholder="id ..." value="<?php echo $_SESSION['id']  ;?> " readonly>
-                        </div>
-                      </div>
                       <div class="col-sm-6">
                         <div class="form-group">
                           <label>Bagian</label>

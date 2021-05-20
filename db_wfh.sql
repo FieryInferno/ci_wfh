@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 08 Bulan Mei 2021 pada 00.09
+-- Waktu pembuatan: 20 Bulan Mei 2021 pada 13.46
 -- Versi server: 10.1.32-MariaDB
 -- Versi PHP: 7.2.5
 
@@ -38,16 +38,16 @@ CREATE TABLE `alokasi_pekerjaan` (
   `status` enum('belum_selesai','menunggu_verifikasi','selesai') NOT NULL,
   `catatan` text,
   `tanggal` date NOT NULL,
-  `hasil` varchar(100) NOT NULL
+  `hasil` varchar(100) NOT NULL,
+  `no_urut` int(191) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `alokasi_pekerjaan`
 --
 
-INSERT INTO `alokasi_pekerjaan` (`id_bekerja`, `nama_pekerjaan`, `nama_pegawai`, `dari`, `bagian`, `regional_pekerjaan`, `status`, `catatan`, `tanggal`, `hasil`) VALUES
-('BK-0001', 'HD (Harga Perdesaan)', '82', '84', 'Kepala Seksi Distribusi', '1', 'belum_selesai', ' Pastikan pendataan dilakukan dengan baik', '2021-05-09', ''),
-('BK-0002', 'HD (Harga Perdesaan)', '82', '84', ' Kepala Seksi Distribusi', '2', 'belum_selesai', NULL, '2021-05-10', '');
+INSERT INTO `alokasi_pekerjaan` (`id_bekerja`, `nama_pekerjaan`, `nama_pegawai`, `dari`, `bagian`, `regional_pekerjaan`, `status`, `catatan`, `tanggal`, `hasil`, `no_urut`) VALUES
+('BK-0001 ', 'PK-0001', '82', '84', ' Kepala Seksi Distribusi', '1', 'menunggu_verifikasi', NULL, '2021-05-21', '', 0);
 
 -- --------------------------------------------------------
 
@@ -83,25 +83,19 @@ INSERT INTO `chat_user` (`user_id`, `login_oauth_uid`, `first_name`, `last_name`
 CREATE TABLE `detail_pekerjaan` (
   `id_kegiatan` int(100) NOT NULL,
   `nama_kegiatan` varchar(100) NOT NULL,
-  `id_pekerjaan` varchar(100) NOT NULL
+  `id_pekerjaan` varchar(100) NOT NULL,
+  `hasil` varchar(191) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `detail_pekerjaan`
 --
 
-INSERT INTO `detail_pekerjaan` (`id_kegiatan`, `nama_kegiatan`, `id_pekerjaan`) VALUES
-(3, 'Melakukan Survey Pasar', 'PK-0001'),
-(4, 'Mendata harga sayuran', 'PK-0001'),
-(5, 'Melakukan Kegiatan Mensurvey', 'PK-0003 '),
-(6, 'Melakukan Survey Pasar', 'PK-0002'),
-(7, 'nsnzmn', 'PK-0001'),
-(8, ' zmmz x', 'PK-0005 '),
-(9, ' zmmz x', 'PK-0005 '),
-(10, 'jnmxznx', 'PK-0001'),
-(11, 'Pembuatan miniatur candi borobudur', 'PK-0001'),
-(12, 'Pembuatan miniatur candi borobudur', 'PK-0001'),
-(13, 'Melakukan Survey Pasar ke desa', 'PK-0001');
+INSERT INTO `detail_pekerjaan` (`id_kegiatan`, `nama_kegiatan`, `id_pekerjaan`, `hasil`) VALUES
+(16, 'b', 'PK-0001', 'CV_M_Bagas_Setia01.pdf'),
+(17, 'c', 'PK-0001', 'document_(1).pdf'),
+(18, 'd', 'PK-0001', 'document_(1)1.pdf'),
+(19, 'e', 'PK-0001', 'document_(1)2.pdf');
 
 -- --------------------------------------------------------
 
@@ -278,6 +272,7 @@ INSERT INTO `pegawai` (`nip`, `nama`, `jenis_kelamin`, `alamat`, `tempatlahir`, 
 
 CREATE TABLE `pekerjaan` (
   `id_pekerjaan` varchar(20) NOT NULL,
+  `no_urut` int(191) NOT NULL,
   `nama_pekerjaan` varchar(50) NOT NULL,
   `bagian` varchar(50) NOT NULL,
   `jenis` enum('Tahunan','Bulanan','','') NOT NULL
@@ -287,12 +282,8 @@ CREATE TABLE `pekerjaan` (
 -- Dumping data untuk tabel `pekerjaan`
 --
 
-INSERT INTO `pekerjaan` (`id_pekerjaan`, `nama_pekerjaan`, `bagian`, `jenis`) VALUES
-('PK-0001', 'HD (Harga Perdesaan)', 'Kepala Seksi Distribusi', 'Bulanan'),
-('PK-0002', 'HKG', 'Kepala Seksi Distribusi', 'Tahunan'),
-('PK-0003 ', 'HPS (Harga Produsen)', 'Kepala Seksi Distribusi', 'Bulanan'),
-('PK-0004 ', 'HPG (Harga Produsen Gabah)', 'Kepala Seksi Distribusi', 'Bulanan'),
-('PK-0005 ', 'HPS (Harga Produsen)', 'Kepala Seksi Distribusi', 'Bulanan');
+INSERT INTO `pekerjaan` (`id_pekerjaan`, `no_urut`, `nama_pekerjaan`, `bagian`, `jenis`) VALUES
+('PK-0001', 1, 'a', 'Kepala Seksi Distribusi', 'Bulanan');
 
 -- --------------------------------------------------------
 
@@ -321,7 +312,8 @@ INSERT INTO `regional_pekerjaan` (`id_regional`, `lokasi`) VALUES
 -- Indeks untuk tabel `alokasi_pekerjaan`
 --
 ALTER TABLE `alokasi_pekerjaan`
-  ADD PRIMARY KEY (`id_bekerja`);
+  ADD PRIMARY KEY (`id_bekerja`),
+  ADD KEY `nama_pekerjaan` (`nama_pekerjaan`);
 
 --
 -- Indeks untuk tabel `chat_user`
@@ -333,7 +325,8 @@ ALTER TABLE `chat_user`
 -- Indeks untuk tabel `detail_pekerjaan`
 --
 ALTER TABLE `detail_pekerjaan`
-  ADD PRIMARY KEY (`id_kegiatan`);
+  ADD PRIMARY KEY (`id_kegiatan`),
+  ADD KEY `id_pekerjaan` (`id_pekerjaan`);
 
 --
 -- Indeks untuk tabel `golongan`
@@ -385,7 +378,7 @@ ALTER TABLE `chat_user`
 -- AUTO_INCREMENT untuk tabel `detail_pekerjaan`
 --
 ALTER TABLE `detail_pekerjaan`
-  MODIFY `id_kegiatan` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_kegiatan` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT untuk tabel `golongan`
@@ -416,6 +409,22 @@ ALTER TABLE `laporan_pekerjaan`
 --
 ALTER TABLE `pegawai`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
+
+--
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+--
+
+--
+-- Ketidakleluasaan untuk tabel `alokasi_pekerjaan`
+--
+ALTER TABLE `alokasi_pekerjaan`
+  ADD CONSTRAINT `alokasi_pekerjaan_ibfk_1` FOREIGN KEY (`nama_pekerjaan`) REFERENCES `pekerjaan` (`id_pekerjaan`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `detail_pekerjaan`
+--
+ALTER TABLE `detail_pekerjaan`
+  ADD CONSTRAINT `detail_pekerjaan_ibfk_1` FOREIGN KEY (`id_pekerjaan`) REFERENCES `pekerjaan` (`id_pekerjaan`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

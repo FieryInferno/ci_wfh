@@ -122,7 +122,7 @@
             </li>
 
             <li class="nav-item">
-              <a href="<?php echo base_url(); ?>kepala_seksi/alokasi_pekerjaan" class="nav-link">
+              <a href="<?php echo base_url(); ?>kepala_seksi/alokasi_pekerjaan.html" class="nav-link">
                 <i class="nav-icon fas fa-edit" style="color :#339af0;"></i>
                 <p>
                   Alokasi Pekerjaan

@@ -28,11 +28,7 @@
   <link rel="stylesheet" href="<?php echo base_url();?>assets/OverlayScrollbars.min.css">
   <!-- Daterange picker -->
   <link rel="stylesheet" href="<?php echo base_url();?>assets/daterangepicker.css">
-   <!-- Bootstrap Core CSS -->
- <!-- DataTables CSS -->
-
-
-  <!-- summernote -->
+  
   <link rel="stylesheet" href="<?php echo base_url();?>assets/plugins/summernote/summernote-bs4.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="<?php echo base_url();?>assets/https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
@@ -120,7 +116,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="<?php echo base_url()."pegawai/list_pekerjaan"?>" class="nav-link">
+              <a href="<?php echo base_url()."pegawai/pekerjaan.html"?>" class="nav-link">
                 <i class="nav-icon fas fa-edit" style="color :#339af0;"></i>
                 <p>
                   List Pekerjaan
@@ -165,15 +161,6 @@
     <div class="content-wrapper">
       <?php $this->load->view($content) ?>
     </div>
-                  </div>
-                              </div>
-                          </div>
-
-            </div><!-- /.container-fluid -->
-      </section>
-      <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
     <footer class="main-footer">
       <strong>Copyright &copy; 2021 <a href="<?php echo base_url();?>assets/http://adminlte.io">Pani Sri Mulyani</a>.</strong>
       All rights reserved.

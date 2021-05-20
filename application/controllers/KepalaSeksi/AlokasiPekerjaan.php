@@ -9,7 +9,7 @@ class AlokasiPekerjaan extends CI_Controller {
       $id_bekerja         = $_POST ['id_bekerja'];
       $nama_pekerjaan     = $_POST ['nama_pekerjaan'];
       $nama_pegawai       = $_POST ['nama_pegawai'];
-      $dari               = $_POST ['dari'];
+      $dari               = $this->session->id;
       $bagian             = $_POST ['bagian'];
       $regional_pekerjaan = $_POST ['regional_pekerjaan'];
       $status             = 'belum_selesai';
@@ -37,7 +37,7 @@ class AlokasiPekerjaan extends CI_Controller {
             </button>
           </div>
         ');
-        redirect('kepala_seksi/alokasi_pekerjaan');
+        redirect('kepala_seksi/alokasi_pekerjaan.html');
       } else {
         $this->session->set_flashdata('pesan', '
           <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -47,13 +47,12 @@ class AlokasiPekerjaan extends CI_Controller {
             </button>
           </div>
         ');
-        redirect('kepala_seksi/alokasi_pekerjaan');
+        redirect('kepala_seksi/alokasi_pekerjaan.html');
       } 
     }
     $dariDB                     = $this->M_Pekerjaan->idbekerja();
-		$nourut                     = substr($dariDB, 3, 4);
-		$idbekerjasekarang          = $nourut + 1 ;
-		$data                       = array('id_bekerja' => $idbekerjasekarang );
+    if ($dariDB) $data['id_bekerja']  = $dariDB + 1;
+    else $data['id_bekerja']  = 1;
 		$data['content'] 		        = 'KepalaSeksi/v_dataalokasi';
 		$data['alokasi_pekerjaan']  = $this->M_Pekerjaan->getalokasikasi();
 		$this->load->view('KepalaSeksi/temp_kepalaseksi',$data);
@@ -65,5 +64,19 @@ class AlokasiPekerjaan extends CI_Controller {
     $this->output
       ->set_content_type('application/json')
       ->set_output(json_encode($data));
+  }
+
+  public function hapus($id_bekerja)
+  {
+    $this->M_Pekerjaan->delete('alokasi_pekerjaan', ['id_bekerja' => $id_bekerja]);
+    $this->session->set_flashdata('pesan', '
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Sukses!</strong> Berhasil Hapus Pekerjaan.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    ');
+    redirect('kepala_seksi/alokasi_pekerjaan.html');
   }
 }
