@@ -29,7 +29,7 @@ class Pekerjaan extends CI_Controller {
         $foto = $this->upload->data('file_name');
       }
     }
-		$res    = $this->M_Pekerjaan->Updatedata('detail_pekerjaan', ['hasil' => $foto], ['id_kegiatan' => $this->input->post('id_kegiatan')]);
+		$res    = $this->M_Pekerjaan->Updatedata('detail_alokasi', ['hasil' => $foto], ['id_detail_alokasi' => $this->input->post('id_detail_alokasi')]);
     $persen = $this->M_Pekerjaan->hitungPersenPekerjaan($this->input->post('id_bekerja'));
     if ($persen == 1) $status  = 'menunggu_verifikasi';
     else $status = 'belum_selesai';

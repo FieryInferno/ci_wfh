@@ -127,19 +127,19 @@ class M_Pekerjaan extends CI_Model {
 
   public function getDetailAlokasiPekerjaan($id_bekerja)
   {
-    $this->db->join('alokasi_pekerjaan', 'detail_pekerjaan.id_pekerjaan = alokasi_pekerjaan.nama_pekerjaan');
-    $this->db->select('detail_pekerjaan.*');
-    return $this->db->get_where('detail_pekerjaan', [
+    $this->db->join('alokasi_pekerjaan', 'detail_alokasi.id_bekerja = alokasi_pekerjaan.id_bekerja');
+    $this->db->select('detail_alokasi.*');
+    return $this->db->get_where('detail_alokasi', [
       'alokasi_pekerjaan.id_bekerja'  => $id_bekerja
     ])->result_array();
   }
 
   public function hitungPersenPekerjaan($id_bekerja)
   {
-    $this->db->join('alokasi_pekerjaan', 'detail_pekerjaan.id_pekerjaan = alokasi_pekerjaan.nama_pekerjaan');
-    $this->db->select('detail_pekerjaan.*');
-    $data = $this->db->get_where('detail_pekerjaan', [
-      'id_bekerja'  => $id_bekerja 
+    $this->db->join('alokasi_pekerjaan', 'detail_alokasi.id_bekerja = alokasi_pekerjaan.id_bekerja');
+    $this->db->select('detail_alokasi.*');
+    $data = $this->db->get_where('detail_alokasi', [
+      'detail_alokasi.id_bekerja'  => $id_bekerja 
     ])->result_array();
     $belumSelesai = array_count_values(array_column($data, 'hasil'))['0'];
     if ($belumSelesai) {

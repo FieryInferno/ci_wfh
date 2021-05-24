@@ -41,8 +41,8 @@
                           if ($row['hasil']) { ?>
                             <a href ="<?= base_url('assets/file_pekerjaan/' . $row['hasil']); ?>" class="btn btn-primary btn-xs badge-success"><i class="fa fa-eye"></i> Lihat</a>
                           <?php } else { ?>
-                            <a href ="" type="button" data-toggle="modal" data-target="#ModalEdit<?php echo $row->id_kegiatan;?>" class="btn btn-primary btn-xs badge-success"><i class="fa fa-upload"></i> Submit</a>
-                            <div class="modal fade" id="ModalEdit<?php echo $row->id_kegiatan;?>">
+                            <a href ="" type="button" data-toggle="modal" data-target="#ModalEdit<?php echo $row->id_detail_alokasi;?>" class="btn btn-primary btn-xs badge-success"><i class="fa fa-upload"></i> Submit</a>
+                            <div class="modal fade" id="ModalEdit<?php echo $row->id_detail_alokasi;?>">
                               <div class="modal-dialog">
                                 <div class="modal-content">
                                   <div class="modal-header">
@@ -59,7 +59,7 @@
                                             <div class="form-group">
                                               <label>Hasil Pekerjaan</label>
                                               <input type="file" class="form-control" name="hasil" required="required" />
-                                              <input type="hidden" name="id_kegiatan" value="<?= $row['id_kegiatan'];?>"/>
+                                              <input type="hidden" name="id_detail_alokasi" value="<?= $row['id_detail_alokasi'];?>"/>
                                               <input type="hidden" name="id_bekerja" value="<?= $id_bekerja;?>"/>
                                             </div>
                                           </div>

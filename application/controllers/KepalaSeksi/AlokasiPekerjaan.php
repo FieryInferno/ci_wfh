@@ -27,7 +27,15 @@ class AlokasiPekerjaan extends CI_Controller {
         'tanggal'             => $tanggal, 
         'catatan'             => $catatan
       );
-      $res  = $this->M_Pekerjaan->Insertdata('alokasi_pekerjaan', $data);
+      $res    = $this->M_Pekerjaan->Insertdata('alokasi_pekerjaan', $data);
+      $detail = $this->M_Pekerjaan->get_detailpekerjaan($nama_pekerjaan);
+      foreach ($detail as $key) {
+        $this->M_Pekerjaan->Insertdata('detail_alokasi', [
+          'id_bekerja'    => $id_bekerja,
+          'nama_kegiatan' => $key->nama_kegiatan,
+          'id_pekerjaan'  => $nama_pekerjaan
+        ]);
+      }
       if ($res >= 1){
         $this->session->set_flashdata('pesan', '
           <div class="alert alert-success alert-dismissible fade show" role="alert">

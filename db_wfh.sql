@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 20 Bulan Mei 2021 pada 13.46
+-- Waktu pembuatan: 24 Bulan Mei 2021 pada 05.51
 -- Versi server: 10.1.32-MariaDB
 -- Versi PHP: 7.2.5
 
@@ -47,7 +47,7 @@ CREATE TABLE `alokasi_pekerjaan` (
 --
 
 INSERT INTO `alokasi_pekerjaan` (`id_bekerja`, `nama_pekerjaan`, `nama_pegawai`, `dari`, `bagian`, `regional_pekerjaan`, `status`, `catatan`, `tanggal`, `hasil`, `no_urut`) VALUES
-('BK-0001 ', 'PK-0001', '82', '84', ' Kepala Seksi Distribusi', '1', 'menunggu_verifikasi', NULL, '2021-05-21', '', 0);
+('BK-0001 ', 'PK-0001', '82', '84', ' Kepala Seksi Distribusi', '1', 'belum_selesai', NULL, '2021-05-25', '', 0);
 
 -- --------------------------------------------------------
 
@@ -77,25 +77,48 @@ INSERT INTO `chat_user` (`user_id`, `login_oauth_uid`, `first_name`, `last_name`
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `detail_alokasi`
+--
+
+CREATE TABLE `detail_alokasi` (
+  `id_detail_alokasi` int(11) NOT NULL,
+  `id_bekerja` varchar(191) NOT NULL,
+  `nama_kegiatan` varchar(191) NOT NULL,
+  `id_pekerjaan` varchar(191) NOT NULL,
+  `hasil` varchar(191) DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `detail_alokasi`
+--
+
+INSERT INTO `detail_alokasi` (`id_detail_alokasi`, `id_bekerja`, `nama_kegiatan`, `id_pekerjaan`, `hasil`) VALUES
+(1, 'BK-0001 ', 'b', 'PK-0001', 'document.pdf'),
+(2, 'BK-0001 ', 'c', 'PK-0001', '0'),
+(3, 'BK-0001 ', 'd', 'PK-0001', '0'),
+(4, 'BK-0001 ', 'e', 'PK-0001', '0');
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `detail_pekerjaan`
 --
 
 CREATE TABLE `detail_pekerjaan` (
   `id_kegiatan` int(100) NOT NULL,
   `nama_kegiatan` varchar(100) NOT NULL,
-  `id_pekerjaan` varchar(100) NOT NULL,
-  `hasil` varchar(191) DEFAULT '0'
+  `id_pekerjaan` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `detail_pekerjaan`
 --
 
-INSERT INTO `detail_pekerjaan` (`id_kegiatan`, `nama_kegiatan`, `id_pekerjaan`, `hasil`) VALUES
-(16, 'b', 'PK-0001', 'CV_M_Bagas_Setia01.pdf'),
-(17, 'c', 'PK-0001', 'document_(1).pdf'),
-(18, 'd', 'PK-0001', 'document_(1)1.pdf'),
-(19, 'e', 'PK-0001', 'document_(1)2.pdf');
+INSERT INTO `detail_pekerjaan` (`id_kegiatan`, `nama_kegiatan`, `id_pekerjaan`) VALUES
+(16, 'b', 'PK-0001'),
+(17, 'c', 'PK-0001'),
+(18, 'd', 'PK-0001'),
+(19, 'e', 'PK-0001');
 
 -- --------------------------------------------------------
 
@@ -322,6 +345,12 @@ ALTER TABLE `chat_user`
   ADD PRIMARY KEY (`user_id`);
 
 --
+-- Indeks untuk tabel `detail_alokasi`
+--
+ALTER TABLE `detail_alokasi`
+  ADD PRIMARY KEY (`id_detail_alokasi`);
+
+--
 -- Indeks untuk tabel `detail_pekerjaan`
 --
 ALTER TABLE `detail_pekerjaan`
@@ -373,6 +402,12 @@ ALTER TABLE `pekerjaan`
 --
 ALTER TABLE `chat_user`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT untuk tabel `detail_alokasi`
+--
+ALTER TABLE `detail_alokasi`
+  MODIFY `id_detail_alokasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `detail_pekerjaan`
