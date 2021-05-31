@@ -76,7 +76,7 @@ class Jadwal extends CI_Controller {
 
 	public function cetak()
 	{
-    $data['jadwal']   = $this->M_Jadwal->getAll();
+    $data['jadwal'] = $this->M_Jadwal->getAll();
 		ob_start();
       $this->load->view('tata_usaha/jadwal_pdf.php', $data);
       $html = ob_get_contents();

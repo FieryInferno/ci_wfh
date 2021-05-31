@@ -26,31 +26,25 @@ class LaporanModel extends CI_Model {
 
     $this->upload->initialize($config);
 
-    // if (!$this->upload->do_upload('bukti')) {
-    //   $this->session->flashdata('pesan', '
-    //     <div class="alert alert-danger alert-dismissible fade show" role="alert">
-    //       <strong>Gagal!</strong> gagal mengupload file surat.
-    //       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    //         <span aria-hidden="true">&times;</span>
-    //       </button>
-    //     </div>
-    //   ');
-    //   redirect('Pengirim/Surat/add');
-    // } else {
-    //   $file = $this->upload->data('file_name');
-    // }
+    if (!$this->upload->do_upload('bukti')) {
+      print_r($this->upload->display_errors());
+      die();
+    } else {
+      $file = $this->upload->data('file_name');
+    }
 
-    // $this->db->insert('laporan_pekerjaan', [
-    //   'nama_aktivitas'  => $this->input->post('nama_aktivitas'),
-    //   'satuan'          => $this->input->post('satuan'),
-    //   'volume'          => $this->input->post('volume'),
-    //   'durasi'          => $this->input->post('durasi'),
-    //   'pemberi_kerja'   => $this->input->post('pemberi_kerja'),
-    //   'status'          => $status,
-    //   'id_pegawai'      => $this->session->id,
-    //   'jadwal'          => $this->input->post('jadwal'),
-    //   'bukti'           => $file
-    // ]);
+    $this->db->insert('laporan_pekerjaan', [
+      'nama_aktivitas'  => $this->input->post('nama_aktivitas'),
+      'satuan'          => $this->input->post('satuan'),
+      'volume'          => $this->input->post('volume'),
+      'durasi'          => $this->input->post('durasi'),
+      'pemberi_kerja'   => $this->input->post('pemberi_kerja'),
+      'status'          => $status,
+      'id_pegawai'      => $this->session->id,
+      'jadwal'          => $this->input->post('jadwal'),
+      'bukti'           => $file,
+      'tanggal'         => date('Y-m-d')
+    ]);
 
     $config = [
       'mailtype'    => 'html',
@@ -73,5 +67,12 @@ class LaporanModel extends CI_Model {
     $this->email->subject('Notifikasi Laporan Harian Pegawai');
     $this->email->message($this->session->nama . 'sudah menginput laporan harian');
     $this->email->send();
+  }
+
+  public function getLaporanHarianByTanggal()
+  {
+    return $this->db->get_where('laporan_pekerjaan', [
+      'tanggal' => $this->input->get('tanggal')
+    ])->result_array();
   }
 }

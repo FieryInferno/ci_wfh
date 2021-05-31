@@ -13,6 +13,7 @@ $route['tata_usaha/jadwal/cetak']     = 'Tata_usaha/Jadwal/cetak';
 $route['pegawai.html']                    = 'Pegawai/Pegawai';
 $route['pegawai/laporan_harian']          = 'Pegawai/Pegawai/laporan_harian';
 $route['pegawai/laporan_harian/tambah']   = 'Pegawai/Pegawai/input_laporan_harian';
+$route['pegawai/laporan_harian/cetak']    = 'Pegawai/Pegawai/cetakLaporanHarian';
 $route['pegawai/pekerjaan.html']          = 'Pegawai/Pekerjaan';
 $route['pegawai/pekerjaan/lihat/(:any)']  = 'Pegawai/Pekerjaan/lihat/$1';
 $route['pegawai/pekerjaan/input_hasil']   = 'Pegawai/Pekerjaan/inputHasil';

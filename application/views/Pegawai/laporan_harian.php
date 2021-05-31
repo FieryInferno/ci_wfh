@@ -1,4 +1,3 @@
-<!-- Content Header (Page header) -->
 <div class="content-header">
   <div class="container-fluid">
     <div class="row mb-2">
@@ -22,6 +21,34 @@
           <div class="col">
             <div class="float-left">
               <a href="<?= base_url()."pegawai/laporan_harian/tambah"?> " button type="button" class="btn btn-primary float-left"><i class="fas fa-plus"></i> Tambah Laporan</a>
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-primary float-left" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-print"></i> Cetak</button>
+
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Cetak Laporan Harian</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <form action="<?= base_url(); ?>pegawai/laporan_harian/cetak" method="get">
+                      <div class="modal-body">
+                        <div class="form-group">
+                          <label>Tanggal</label>
+                          <input type="date" class="form-control" name="tanggal" required>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Cetak</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>  
