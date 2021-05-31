@@ -23,8 +23,8 @@ class Jadwal extends CI_Controller {
       $tanggal  = cal_days_in_month(CAL_GREGORIAN, $bulan, $tahun);
       $pegawai  = $this->M_Pegawai->getAll();
       for ($i=0; $i < count($pegawai); $i++) {
-        $key                  = $pegawai[$i];
-        $jadwal['id_pegawai'] = $key['id'];
+        $key                        = $pegawai[$i];
+        $jadwal['id_pegawai']       = $key['id'];
         $jadwal_temp['id_pegawai']  = $key['id'];
         for ($j=1; $j < $tanggal+1; $j++) {
           $nomor        = '`' . $j . '`';
@@ -54,6 +54,14 @@ class Jadwal extends CI_Controller {
                     case 'wfo':
                       $kerja = 'wfh';
                       break;
+
+                    default:
+                      if ($i%2 == 0) {
+                        $kerja  = 'wfh';
+                      } else {
+                        $kerja  = 'wfo';
+                      }
+                      break;
                   }
                   break;
 
@@ -64,6 +72,7 @@ class Jadwal extends CI_Controller {
             }
             $jadwal[$nomor]   = $kerja;
             $jadwal_temp[$j]  = $kerja;
+            $jadwal['bulan']  = $bulan;
           }
         }
         $this->M_Jadwal->insert($jadwal);

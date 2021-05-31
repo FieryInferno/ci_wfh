@@ -10,41 +10,46 @@ class M_Pegawai extends CI_Model {
 		return $this->db->get($this->table)->result_array();
 	}
 
-public function Getpegawai($where="")
+  public function Getpegawai($where="")
 	{
 		$data = $this->db->query('select * from pegawai '.$where);
 		return $data->result_array();
 	}
 
-public function Getgolongan($where="")
+  public function Getgolongan($where="")
 	{
 		$data = $this->db->query('select * from golongan '.$where);
 		return $data->result_array();
 	}
 
-public function Getjabatan($where="")
+  public function Getjabatan($where="")
 	{
 		$data = $this->db->query('select * from jabatan '.$where);
 		return $data->result_array();
 	}
 
-		public function Insertdata($tableName,$data)
+  public function Insertdata($tableName,$data)
 	{
-
 		$res = $this->db->insert($tableName,$data);
 		return $res ;
-		}
-			public function Updatedata($tableName,$data,$where)
+  }
+
+  public function Updatedata($tableName,$data,$where)
 	{
 		$res = $this->db->update($tableName,$data, $where);
 		return $res ;
+  }
 
-		}
-		public function Deletedata($tableName,$where)
+  public function Deletedata($tableName,$where)
 	{
 		$res = $this->db->delete($tableName,$where);
 		return $res ;
+  }
 
-		}
-
+  public function getJadwal()
+  {
+    return $this->db->get_where('jadwal', [
+      'id_pegawai'  => $this->session->id
+    ])->row_array();
+  }
 }

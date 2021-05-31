@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 24 Bulan Mei 2021 pada 05.51
+-- Waktu pembuatan: 31 Bulan Mei 2021 pada 12.47
 -- Versi server: 10.1.32-MariaDB
 -- Versi PHP: 7.2.5
 
@@ -214,18 +214,19 @@ CREATE TABLE `jadwal` (
   `28` varchar(191) NOT NULL,
   `29` varchar(191) DEFAULT NULL,
   `30` varchar(191) DEFAULT NULL,
-  `31` varchar(191) DEFAULT NULL
+  `31` varchar(191) DEFAULT NULL,
+  `bulan` varchar(191) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `jadwal`
 --
 
-INSERT INTO `jadwal` (`id_jadwal`, `id_pegawai`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `17`, `18`, `19`, `20`, `21`, `22`, `23`, `24`, `25`, `26`, `27`, `28`, `29`, `30`, `31`) VALUES
-(14, '1', 'wfh', 'wfo', 'libur', 'libur', 'wfh', 'wfo', 'wfh', 'wfo', 'wfh', 'libur', 'libur', 'wfo', 'wfh', 'wfo', 'wfh', 'wfo', 'libur', 'libur', 'wfh', 'wfo', 'wfh', 'wfo', 'wfh', 'libur', 'libur', 'wfo', 'wfh', 'wfo', 'wfh', 'wfo', NULL),
-(15, '82', 'wfo', 'wfh', 'libur', 'libur', 'wfo', 'wfh', 'wfo', 'wfh', 'wfo', 'libur', 'libur', 'wfh', 'wfo', 'wfh', 'wfo', 'wfh', 'libur', 'libur', 'wfo', 'wfh', 'wfo', 'wfh', 'wfo', 'libur', 'libur', 'wfh', 'wfo', 'wfh', 'wfo', 'wfh', NULL),
-(16, '83', 'wfh', 'wfo', 'libur', 'libur', 'wfh', 'wfo', 'wfh', 'wfo', 'wfh', 'libur', 'libur', 'wfo', 'wfh', 'wfo', 'wfh', 'wfo', 'libur', 'libur', 'wfh', 'wfo', 'wfh', 'wfo', 'wfh', 'libur', 'libur', 'wfo', 'wfh', 'wfo', 'wfh', 'wfo', NULL),
-(17, '84', 'wfo', 'wfh', 'libur', 'libur', 'wfo', 'wfh', 'wfo', 'wfh', 'wfo', 'libur', 'libur', 'wfh', 'wfo', 'wfh', 'wfo', 'wfh', 'libur', 'libur', 'wfo', 'wfh', 'wfo', 'wfh', 'wfo', 'libur', 'libur', 'wfh', 'wfo', 'wfh', 'wfo', 'wfh', NULL);
+INSERT INTO `jadwal` (`id_jadwal`, `id_pegawai`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `17`, `18`, `19`, `20`, `21`, `22`, `23`, `24`, `25`, `26`, `27`, `28`, `29`, `30`, `31`, `bulan`) VALUES
+(42, '1', 'libur', 'libur', 'wfh', 'wfo', 'wfh', 'wfo', 'wfh', 'libur', 'libur', 'wfo', 'wfh', 'wfo', 'wfh', 'wfo', 'libur', 'libur', 'wfh', 'wfo', 'wfh', 'wfo', 'wfh', 'libur', 'libur', 'wfo', 'wfh', 'wfo', 'wfh', 'wfo', 'libur', 'libur', 'wfh', '05'),
+(43, '82', 'libur', 'libur', 'wfo', 'wfh', 'wfo', 'wfh', 'wfo', 'libur', 'libur', 'wfh', 'wfo', 'wfh', 'wfo', 'wfh', 'libur', 'libur', 'wfo', 'wfh', 'wfo', 'wfh', 'wfo', 'libur', 'libur', 'wfh', 'wfo', 'wfh', 'wfo', 'wfh', 'libur', 'libur', 'wfo', '05'),
+(44, '83', 'libur', 'libur', 'wfh', 'wfo', 'wfh', 'wfo', 'wfh', 'libur', 'libur', 'wfo', 'wfh', 'wfo', 'wfh', 'wfo', 'libur', 'libur', 'wfh', 'wfo', 'wfh', 'wfo', 'wfh', 'libur', 'libur', 'wfo', 'wfh', 'wfo', 'wfh', 'wfo', 'libur', 'libur', 'wfh', '05'),
+(45, '84', 'libur', 'libur', 'wfo', 'wfh', 'wfo', 'wfh', 'wfo', 'libur', 'libur', 'wfh', 'wfo', 'wfh', 'wfo', 'wfh', 'libur', 'libur', 'wfo', 'wfh', 'wfo', 'wfh', 'wfo', 'libur', 'libur', 'wfh', 'wfo', 'wfh', 'wfo', 'wfh', 'libur', 'libur', 'wfo', '05');
 
 -- --------------------------------------------------------
 
@@ -244,15 +245,17 @@ CREATE TABLE `laporan_pekerjaan` (
   `waktu` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `id_pegawai` varchar(191) NOT NULL,
   `jadwal` enum('wfh','wfo') NOT NULL,
-  `bukti` varchar(191) NOT NULL
+  `bukti` varchar(191) NOT NULL,
+  `tanggal` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `laporan_pekerjaan`
 --
 
-INSERT INTO `laporan_pekerjaan` (`id_aktivitas`, `nama_aktivitas`, `satuan`, `volume`, `durasi`, `pemberi_kerja`, `status`, `waktu`, `id_pegawai`, `jadwal`, `bukti`) VALUES
-(5, 'Membuat aplikasi absensi', '1', 1, '1', 'a', 'tepat_waktu', '2021-04-26 04:06:50', '82', 'wfh', 'document.pdf');
+INSERT INTO `laporan_pekerjaan` (`id_aktivitas`, `nama_aktivitas`, `satuan`, `volume`, `durasi`, `pemberi_kerja`, `status`, `waktu`, `id_pegawai`, `jadwal`, `bukti`, `tanggal`) VALUES
+(5, 'Membuat aplikasi absensi', '1', 1, '1', 'a', 'tepat_waktu', '2021-05-31 02:45:29', '82', 'wfh', 'document.pdf', '2021-04-26'),
+(6, 'Membuat aplikasi absensi', '1', 1, 'a', 'a', 'tepat_waktu', '2021-05-31 02:46:00', '82', '', 'document1.pdf', '2021-05-31');
 
 -- --------------------------------------------------------
 
@@ -431,13 +434,13 @@ ALTER TABLE `jabatan`
 -- AUTO_INCREMENT untuk tabel `jadwal`
 --
 ALTER TABLE `jadwal`
-  MODIFY `id_jadwal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_jadwal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT untuk tabel `laporan_pekerjaan`
 --
 ALTER TABLE `laporan_pekerjaan`
-  MODIFY `id_aktivitas` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_aktivitas` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `pegawai`

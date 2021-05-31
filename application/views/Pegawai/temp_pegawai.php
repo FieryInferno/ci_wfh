@@ -124,7 +124,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="<?php echo base_url()."index.php/Pegawai/Pegawai/jadwal"?>" class="nav-link">
+              <a href="<?php echo base_url()."pegawai/jadwal.html"?>" class="nav-link">
                 <i class="nav-icon fas fa-inbox" style="color :#339af0;"></i>
                 <p>
                   Jadwal WFH dan WFO

@@ -50,12 +50,6 @@ class Pegawai extends CI_Controller {
     $this->load->view('Pegawai/temp_pegawai', $data);
   }
 
-	public function jadwal()
-	{
-		$data['content']	= 'Pegawai/jadwal';
-    $this->load->view('Pegawai/temp_pegawai', $data);
-	}
-
   public function cetakLaporanHarian()
   {
     $data['laporan_harian'] = $this->LaporanModel->getLaporanHarianByTanggal();

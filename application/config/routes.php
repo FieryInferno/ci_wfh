@@ -18,6 +18,7 @@ $route['pegawai/pekerjaan.html']          = 'Pegawai/Pekerjaan';
 $route['pegawai/pekerjaan/lihat/(:any)']  = 'Pegawai/Pekerjaan/lihat/$1';
 $route['pegawai/pekerjaan/input_hasil']   = 'Pegawai/Pekerjaan/inputHasil';
 $route['pegawai/input_hasil']             = 'Pegawai/Pegawai/input_hasil';
+$route['pegawai/jadwal.html']             = 'Pegawai/Jadwal';
 
 $route['kepala_seksi']                                            = 'KepalaSeksi/KepalaSeksi';
 $route['kepala_seksi/alokasi_pekerjaan.html']                     = 'KepalaSeksi/AlokasiPekerjaan';
@@ -29,5 +30,5 @@ $route['kepala_seksi/pekerjaan/input_sub_pekerjaan.html']         = 'KepalaSeksi
 $route['kepala_seksi/pekerjaan/edit/(:any)']                      = 'KepalaSeksi/Pekerjaan/edit/$1';
 $route['kepala_seksi/pekerjaan/lihat/(:any)']                     = 'KepalaSeksi/Pekerjaan/lihat/$1';
 $route['kepala_seksi/pekerjaan/edit_sub_pekerjaan/(:any)']        = 'KepalaSeksi/Pekerjaan/editSubPekerjaan/$1';
-$route['kepala_seksi/pekerjaan/hapus_sub_pekerjaan/(:any/(:any)'] = 'KepalaSeksi/Pekerjaan/hapusSubPekerjaan/$1/$2';
+$route['kepala_seksi/pekerjaan/hapus_sub_pekerjaan/(:any)/(:any)'] = 'KepalaSeksi/Pekerjaan/hapusSubPekerjaan/$1/$2';
 $route['kepala_seksi/pekerjaan/hapus/(:any)']                     = 'KepalaSeksi/Pekerjaan/hapus/$1';
