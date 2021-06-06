@@ -37,6 +37,27 @@ class AlokasiPekerjaan extends CI_Controller {
         ]);
       }
       if ($res >= 1){
+        $pegawai  = $this->db->get_where('pegawai', ['id' => $nama_pegawai])->row_array();
+        $pekerjan = $this->db->get_where('pekerjaan', ['id_pekerjaan' => $nama_pekerjaan])->row_array();
+        $config = [
+          'mailtype'    => 'html',
+          'charset'     => 'utf-8',
+          'protocol'    => 'smtp',
+          'smtp_host'   => 'smtp.gmail.com',
+          'smtp_user'   => 'fieryinferno33@gmail.com',  // Email gmail
+          'smtp_pass'   => 'NaonWeAh00',  // Password gmail
+          'smtp_crypto' => 'ssl',
+          'smtp_port'   => 465,
+          'crlf'        => "\r\n",
+          'newline'     => "\r\n"
+        ];
+        $this->load->library('email', $config);
+        $this->email->from('fieryinferno33@gmail.com', 'Sistem WFH BPS');
+        $this->email->to($data['email']);
+        $this->email->subject('Notifikasi Laporan Harian Pegawai');
+        $this->email->message('Anda Menerima Pekerjaan Baru nama pekerjaan ' . $pekerjaan['nama_pekerjaan'] . ' pada tanggal ' . $tanggal);
+        $this->email->send();
+
         $this->session->set_flashdata('pesan', '
           <div class="alert alert-success alert-dismissible fade show" role="alert">
             <strong>Sukses!</strong> Berhasil input pekerjaan.

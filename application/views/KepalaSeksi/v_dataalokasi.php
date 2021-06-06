@@ -21,7 +21,7 @@
           <div class="row">
             <div class="col">
               <div class="float-left">
-                <a href="" button type="button" class="btn btn-primary float-left" data-toggle="modal" data-target="#modal-alokasi"><i class="fas fa-plus"></i> Data Alokasi Pekerjaan</a>
+                <button class="btn btn-primary float-left" data-toggle="modal" data-target="#modal-alokasi"><i class="fas fa-plus"></i> Data Alokasi Pekerjaan</button>
               </div>
             </div>
           </div>
@@ -120,7 +120,7 @@
                           <select name="nama_pekerjaan" class='form-control'>
                             <option>Pilih Pekerjaan</option>
                             <?php 
-                              $sql  = $this->db->get_where('pekerjaan', array('bagian' => $_SESSION[jabatan]));
+                              $sql  = $this->db->get_where('pekerjaan', array('bagian' => $_SESSION['jabatan']));
                               foreach ($sql->result() as $key => $value) { ?>
                                 <option value='<?php echo $value->id_pekerjaan ?>'><?php echo $value->nama_pekerjaan ?> </option>
                               <?php }
