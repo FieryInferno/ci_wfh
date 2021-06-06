@@ -35,52 +35,53 @@
 <script src="<?php echo base_url();?>assets/dist/js/demo.js"></script>
 </head>
 <body>
-  <div>
+  <h3><b><font face=""> 
+    Jadwal WFH dan WFO bulan 
     <?php
       switch ($jadwal[0]['bulan']) {
         case '01':
-          echo "Januari";
+          echo 'Januari';
           break;
         case '02':
-          echo "Februari";
+          echo 'Februari';
           break;
         case '03':
-          echo "Maret";
+          echo 'Maret';
           break;
         case '04':
-          echo "April";
+          echo 'April';
           break;
         case '05':
-          echo "Mei";
+          echo 'Mei';
           break;
         case '06':
-          echo "Juni";
+          echo 'Juni';
           break;
         case '07':
-          echo "Juli";
+          echo 'Juli';
           break;
         case '08':
-          echo "Agustus";
+          echo 'Agustus';
           break;
         case '09':
-          echo "September";
+          echo 'September';
           break;
         case '10':
-          echo "Oktober";
+          echo 'Oktober';
           break;
         case '11':
-          echo "November";
+          echo 'November';
           break;
         case '12':
-          echo "Desember";
+          echo 'Desember';
           break;
         
         default:
           # code...
           break;
       }
-    ?> 2021
-  </div>
+    ?> Tahun 2021
+  </font></b></h3>
   <table class="table table-bordered" id="dataTables-example">
     <thead>
       <tr class="nowrap">

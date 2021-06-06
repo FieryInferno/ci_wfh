@@ -3,7 +3,53 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h3><b><font face=""> Jadwal WFH dan WFO</font></b></h3>
+            <h3><b><font face=""> 
+              Jadwal WFH dan WFO bulan 
+              <?php
+                switch ($jadwal[0]['bulan']) {
+                  case '01':
+                    echo 'Januari';
+                    break;
+                  case '02':
+                    echo 'Februari';
+                    break;
+                  case '03':
+                    echo 'Maret';
+                    break;
+                  case '04':
+                    echo 'April';
+                    break;
+                  case '05':
+                    echo 'Mei';
+                    break;
+                  case '06':
+                    echo 'Juni';
+                    break;
+                  case '07':
+                    echo 'Juli';
+                    break;
+                  case '08':
+                    echo 'Agustus';
+                    break;
+                  case '09':
+                    echo 'September';
+                    break;
+                  case '10':
+                    echo 'Oktober';
+                    break;
+                  case '11':
+                    echo 'November';
+                    break;
+                  case '12':
+                    echo 'Desember';
+                    break;
+                  
+                  default:
+                    # code...
+                    break;
+                }
+              ?> Tahun 2021
+            </font></b></h3>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -19,7 +65,7 @@
         <div class="card">
           <div class="card-header">
             <a href="<?= base_url(); ?>tata_usaha/jadwal/generate" class="btn btn-success">Generate Jadwal</a>
-            <a href="<?= base_url(); ?>tata_usaha/jadwal/cetak" class="btn btn-success">Cetak</a>
+            <a href="<?= base_url(); ?>tata_usaha/jadwal/cetak" class="btn btn-success" target="_blank">Cetak</a>
           </div>
           <div class="card-body">
             <div class="table-responsive">
