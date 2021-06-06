@@ -54,7 +54,7 @@ class AlokasiPekerjaan extends CI_Controller {
         $this->load->library('email', $config);
         $this->email->from('fieryinferno33@gmail.com', 'Sistem WFH BPS');
         $this->email->to($data['email']);
-        $this->email->subject('Notifikasi Laporan Harian Pegawai');
+        $this->email->subject('Notifikasi Pekerjaan Baru');
         $this->email->message('Anda Menerima Pekerjaan Baru nama pekerjaan ' . $pekerjaan['nama_pekerjaan'] . ' pada tanggal ' . $tanggal);
         $this->email->send();
 

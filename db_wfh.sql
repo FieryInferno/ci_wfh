@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0.1
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 31 Bulan Mei 2021 pada 12.47
--- Versi server: 10.1.32-MariaDB
--- Versi PHP: 7.2.5
+-- Waktu pembuatan: 06 Jun 2021 pada 16.28
+-- Versi server: 10.4.19-MariaDB
+-- Versi PHP: 8.0.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -36,7 +35,7 @@ CREATE TABLE `alokasi_pekerjaan` (
   `bagian` varchar(100) NOT NULL,
   `regional_pekerjaan` varchar(100) NOT NULL,
   `status` enum('belum_selesai','menunggu_verifikasi','selesai') NOT NULL,
-  `catatan` text,
+  `catatan` text DEFAULT NULL,
   `tanggal` date NOT NULL,
   `hasil` varchar(100) NOT NULL,
   `no_urut` int(191) NOT NULL
@@ -242,7 +241,7 @@ CREATE TABLE `laporan_pekerjaan` (
   `durasi` varchar(100) NOT NULL,
   `pemberi_kerja` varchar(100) NOT NULL,
   `status` varchar(100) NOT NULL,
-  `waktu` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `waktu` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `id_pegawai` varchar(191) NOT NULL,
   `jadwal` enum('wfh','wfo') NOT NULL,
   `bukti` varchar(191) NOT NULL,
@@ -285,9 +284,9 @@ CREATE TABLE `pegawai` (
 --
 
 INSERT INTO `pegawai` (`nip`, `nama`, `jenis_kelamin`, `alamat`, `tempatlahir`, `tanggallahir`, `jabatan`, `namagolongan`, `id`, `username`, `password`, `akses`, `foto`, `email`) VALUES
-('7678', 'Pani Sri Mulyani', 'Perempuan', 'Blok Kaum, Kelurahan Cigadung Subang', 'Jakarta', '2021-04-01', 'Koordinator ', '1/B (Juru Muda Tingk', 1, 'panismy', 'pani1234', 'admin', 'pani.jpg', '0'),
-('7677', 'Sopia Maola Zein', 'Perempuan', 'Blok Dangdeur, Subang', 'Subang', '2021-04-10', 'Kepala BPS', '1/A (Juru Muda)', 82, 'sopia', 'sopiazein', 'pegawai', 'avatar51.png', '0'),
-('12111090', 'Adhi Candra', 'Laki-laki', 'Subang', 'Subang', '2021-04-07', 'KSK', 'I/A (Juru Muda) ', 83, 'admin01', 'zezen', 'tata_usaha', 'Daftar_Pekerjaan.png', '0'),
+('7678', 'Pani Sri Mulyani', 'Perempuan', 'Blok Kaum, Kelurahan Cigadung Subang', 'Jakarta', '2021-04-01', 'Koordinator ', '1/B (Juru Muda Tingk', 1, 'panismy', 'pani1234', 'admin', 'pani.jpg', 'panisrimulyani22@gmail.com'),
+('7677', 'Sopia Maola Zein', 'Perempuan', 'Blok Dangdeur, Subang', 'Subang', '2021-04-10', 'Kepala BPS', '1/A (Juru Muda)', 82, 'sopia', 'sopiazein', 'pegawai', 'avatar51.png', 'panisrimulyani22@gmail.com'),
+('12111090', 'Adhi Candra', 'Laki-laki', 'Subang', 'Subang', '2021-04-07', 'KSK', 'I/A (Juru Muda) ', 83, 'admin01', 'zezen', 'tata_usaha', 'Daftar_Pekerjaan.png', 'panisrimulyani22@gmail.com'),
 ('7678', 'Adi Wijaya', 'Perempuan', 'Subang', 'Subang', '2021-04-06', 'Kepala Seksi Distribusi', 'IV/C (Pembina Utama ', 84, 'kasi', 'kasi', 'kepala_seksi', 'Daftar_Pekerjaan1.png', 'panisrimulyani22@gmail.com');
 
 -- --------------------------------------------------------

@@ -35,6 +35,33 @@ class Pekerjaan extends CI_Controller {
     else $status = 'belum_selesai';
     $this->M_Pekerjaan->Updatedata('alokasi_pekerjaan', ['status' => $status], ['id_bekerja'  => $this->input->post('id_bekerja')]);
 		if ($res >= 1){
+      $config = [
+        'mailtype'    => 'html',
+        'charset'     => 'utf-8',
+        'protocol'    => 'smtp',
+        'smtp_host'   => 'smtp.gmail.com',
+        'smtp_user'   => 'fieryinferno33@gmail.com',  // Email gmail
+        'smtp_pass'   => 'NaonWeAh00',  // Password gmail
+        'smtp_crypto' => 'ssl',
+        'smtp_port'   => 465,
+        'crlf'        => "\r\n",
+        'newline'     => "\r\n"
+      ];
+      $this->load->library('email', $config);
+      $this->email->from('fieryinferno33@gmail.com', 'Sistem WFH BPS');
+      $data = $this->db->get_where('pegawai', [
+        'akses' => 'kepala_seksi'
+      ])->row_array();
+      $this->email->to($data['email']);
+      $this->email->subject('Notifikasi Submit Pekerjaan');
+
+      $this->db->select('pekerjaan.nama_pekerjaan');
+      $this->db->join('pekerjaan', 'alokasi_pekerjaan.nama_pekerjaan = pekerjaan.id_pekerjaan');
+      $pekerjaan  = $this->db->get_where('alokasi_pekerjaan', ['id_bekerja' => $this->input->post('id_bekerja')])->row_array();
+
+      $this->email->message($this->session->nama . ' telah mensubmit sub pekerjaan dari pekerjaan ' . $pekerjaan['nama_pekerjaan']);
+      $this->email->send();
+
       $this->session->set_flashdata('pesan', '
         <div class="alert alert-success alert-dismissible fade show" role="alert">
           <strong>Sukses!</strong> Berhasil input hasil pekerjaan.
