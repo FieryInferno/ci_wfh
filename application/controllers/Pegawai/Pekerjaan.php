@@ -49,9 +49,12 @@ class Pekerjaan extends CI_Controller {
       ];
       $this->load->library('email', $config);
       $this->email->from('fieryinferno33@gmail.com', 'Sistem WFH BPS');
+
+      $this->db->join('alokasi_pekerjaan', 'pegawai.id = alokasi_pekerjaan.dari');
       $data = $this->db->get_where('pegawai', [
-        'akses' => 'kepala_seksi'
+        'alokasi_pekerjaan.id_bekerja' => $this->input->post('id_bekerja')
       ])->row_array();
+      
       $this->email->to($data['email']);
       $this->email->subject('Notifikasi Submit Pekerjaan');
 
