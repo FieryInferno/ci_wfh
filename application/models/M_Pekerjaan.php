@@ -53,7 +53,7 @@ class M_Pekerjaan extends CI_Model {
       'nama_pegawai'  => $this->session->id
     ])->result_array();
     for ($i=0; $i < count($data); $i++) {
-      $key  = $data[$i];
+      $key                  = $data[$i];
       $data[$i]['progress'] = $this->hitungPersenPekerjaan($key['id_bekerja']) * 100;
     }
     return $data;
@@ -94,9 +94,16 @@ class M_Pekerjaan extends CI_Model {
     $this->db->join('regional_pekerjaan', 'alokasi_pekerjaan.regional_pekerjaan = regional_pekerjaan.id_regional');
     $this->db->join('pekerjaan', 'alokasi_pekerjaan.nama_pekerjaan = pekerjaan.id_pekerjaan');
     $this->db->select('alokasi_pekerjaan.tanggal, pekerjaan.nama_pekerjaan, pegawai.nama, regional_pekerjaan.lokasi, alokasi_pekerjaan.status, alokasi_pekerjaan.id_bekerja');
-    return $this->db->get_where('alokasi_pekerjaan', [
+    $data = $this->db->get_where('alokasi_pekerjaan', [
       'dari'  => $this->session->id 
-    ])->result();
+    ])->result_array();
+    // print_r($data[0]->tanggal);
+    // die();
+    for ($i=0; $i < count($data); $i++) {
+      $key                  = $data[$i];
+      $data[$i]['progress'] = $this->hitungPersenPekerjaan($key['id_bekerja']) * 100;
+    }
+    return $data;
   }
 
   public function Updatedata($tableName, $data, $where)
@@ -148,5 +155,22 @@ class M_Pekerjaan extends CI_Model {
       $selesai      = count($data);
     }
     return $selesai / count($data);
+  }
+
+  public function verifikasi($id_bekerja)
+  {
+    switch ($this->input->post('pilihan')) {
+      case 'selesai':
+        $this->db->update('alokasi_pekerjaan', ['status'  => 'selesai'], ['id_bekerja'  => $id_bekerja]);
+        break;
+      case 'tidak_selesai':
+        $this->db->update('detail_alokasi', ['hasil'  => '0'], ['id_bekerja'  => $id_bekerja]);
+        $this->db->update('alokasi_pekerjaan', ['catatan' => $this->input->post('catatan')], ['id_bekerja'  => $id_bekerja]);
+        break;
+      
+      default:
+        # code...
+        break;
+    }
   }
 }

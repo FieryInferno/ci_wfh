@@ -108,4 +108,26 @@ class AlokasiPekerjaan extends CI_Controller {
     ');
     redirect('kepala_seksi/alokasi_pekerjaan.html');
   }
+  
+  public function lihat($id_bekerja)
+  {
+    $data['detail_pekerjaan'] = $this->M_Pekerjaan->getDetailAlokasiPekerjaan($id_bekerja);
+    $data['content']          = 'Admin/lihatPekerjaan';
+    $data['id_bekerja']       = $id_bekerja;
+		$this->load->view('KepalaSeksi/temp_kepalaseksi',$data);
+  }
+  
+  public function verifikasi($id_bekerja)
+  {
+    $this->M_Pekerjaan->verifikasi($id_bekerja);
+    $this->session->set_flashdata('pesan', '
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Sukses!</strong> Berhasil verifikasi.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    ');
+    redirect('kepala_seksi/alokasi_pekerjaan.html');
+  }
 }

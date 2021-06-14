@@ -35,6 +35,7 @@
               <th>Nama Pekerjaan</th>
               <th>Nama Pegawai</th>
               <th>Regional Pekerjaan</th>
+              <th>Progress</th>
               <th>Status</th>
               <th>Aksi</th>
             </tr>   
@@ -45,13 +46,14 @@
               foreach ($alokasi_pekerjaan as $row) { ?>
                 <tr>
                   <td><?php echo $no++ ?></td>                                    
-                  <td><?php echo $row->tanggal ?></td>
-                  <td><?php echo $row->nama_pekerjaan ?></td>
-                  <td><?php echo $row->nama ?></td>
-                  <td><?php echo $row->lokasi ?></td>
+                  <td><?php echo $row['tanggal']; ?></td>
+                  <td><?php echo $row['nama_pekerjaan']; ?></td>
+                  <td><?php echo $row['nama']; ?></td>
+                  <td><?php echo $row['lokasi']; ?></td>
+                  <td><?php echo $row['progress']; ?> %</td>
                   <td>
                     <?php
-                      switch ($row->status) {
+                      switch ($row['status']) {
                         case 'menunggu_verifikasi': ?>
                           <span class="badge badge-warning">Menunggu Verifikasi</span>
                           <?php break;
@@ -71,9 +73,8 @@
                     ?>
                   </td>
                   <td>
-                    <a href="<?= base_url('kepala_seksi/alokasi_pekerjaan/hapus/' . $row->id_bekerja); ?>" onClick="return confirm('Apakah anda yakin ingin menghapus data golongan dengan id : <?php echo $row->id_bekerja ?>');" title="Hapus" class="btn btn-danger btn-sm">
-                      <li class="fa fa-trash"></li>
-                    </a> 
+                    <a href="<?= base_url('kepala_seksi/alokasi_pekerjaan/hapus/' . $row['id_bekerj']); ?>" onClick="return confirm('Apakah anda yakin ingin menghapus data golongan dengan id : <?php echo $row['id_bekerja']; ?>');" title="Hapus" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></a> 
+                    <a href ="<?= base_url('kepala_seksi/alokasi_pekerjaan/lihat/' . $row['id_bekerja']); ?>" type="button" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>
                   </td>
                 </tr>
               <?php }
