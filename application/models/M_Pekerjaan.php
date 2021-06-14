@@ -135,7 +135,7 @@ class M_Pekerjaan extends CI_Model {
   public function getDetailAlokasiPekerjaan($id_bekerja)
   {
     $this->db->join('alokasi_pekerjaan', 'detail_alokasi.id_bekerja = alokasi_pekerjaan.id_bekerja');
-    $this->db->select('detail_alokasi.*');
+    $this->db->select('detail_alokasi.*, alokasi_pekerjaan.tanggal');
     return $this->db->get_where('detail_alokasi', [
       'alokasi_pekerjaan.id_bekerja'  => $id_bekerja
     ])->result_array();

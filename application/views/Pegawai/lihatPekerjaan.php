@@ -61,6 +61,7 @@
                                               <input type="file" class="form-control" name="hasil" required="required" />
                                               <input type="hidden" name="id_detail_alokasi" value="<?= $row['id_detail_alokasi'];?>"/>
                                               <input type="hidden" name="id_bekerja" value="<?= $id_bekerja;?>"/>
+                                              <input type="hidden" name="tanggal" value="<?= $row['tanggal'];?>"/>
                                             </div>
                                           </div>
                                         </div>     
