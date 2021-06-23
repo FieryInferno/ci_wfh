@@ -99,6 +99,7 @@
                         <div class="form-group">
                           <label style="align-items: : right">Id Alokasi Pekerjaan</label>
                           <input type="text" class="form-control" name= "id_bekerja" placeholder="id ..." value="BK-<?php echo sprintf("%04s", $id_bekerja)?> " readonly>
+                          <input type="hidden" name="no_urut" value="<?= $id_bekerja; ?>">
                         </div>
                       </div>
                       <div class="col-sm-6">

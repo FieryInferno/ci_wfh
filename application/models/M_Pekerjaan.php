@@ -80,7 +80,10 @@ class M_Pekerjaan extends CI_Model {
 	function idbekerja() {
     $this->db->select_max('no_urut');
     $hasil  = $this->db->get('alokasi_pekerjaan')->row();
-    return $hasil->no_urut;
+    if ($hasil) return $hasil->no_urut;
+    else return 0;
+    
+    
 	}
 	
 	public function Insertdata($tableName,$data)

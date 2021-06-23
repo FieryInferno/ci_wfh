@@ -25,7 +25,8 @@ class AlokasiPekerjaan extends CI_Controller {
         'regional_pekerjaan'  => $regional_pekerjaan, 
         'status'              => $status, 
         'tanggal'             => $tanggal, 
-        'catatan'             => $catatan
+        'catatan'             => $catatan,
+        'no_urut'             => $this->input->post('no_urut')
       );
       $res    = $this->M_Pekerjaan->Insertdata('alokasi_pekerjaan', $data);
       $detail = $this->M_Pekerjaan->get_detailpekerjaan($nama_pekerjaan);
@@ -79,7 +80,7 @@ class AlokasiPekerjaan extends CI_Controller {
         redirect('kepala_seksi/alokasi_pekerjaan.html');
       } 
     }
-    $dariDB                     = $this->M_Pekerjaan->idbekerja();
+    $dariDB = $this->M_Pekerjaan->idbekerja();
     if ($dariDB) $data['id_bekerja']  = $dariDB + 1;
     else $data['id_bekerja']  = 1;
 		$data['content'] 		        = 'KepalaSeksi/v_dataalokasi';
@@ -120,6 +121,44 @@ class AlokasiPekerjaan extends CI_Controller {
   public function verifikasi($id_bekerja)
   {
     $this->M_Pekerjaan->verifikasi($id_bekerja);
+    $config = [
+      'mailtype'    => 'html',
+      'charset'     => 'utf-8',
+      'protocol'    => 'smtp',
+      'smtp_host'   => 'smtp.gmail.com',
+      'smtp_user'   => 'fieryinferno33@gmail.com',  // Email gmail
+      'smtp_pass'   => 'NaonWeAh00',  // Password gmail
+      'smtp_crypto' => 'ssl',
+      'smtp_port'   => 465,
+      'crlf'        => "\r\n",
+      'newline'     => "\r\n"
+    ];
+    $this->load->library('email', $config);
+    $this->email->from('fieryinferno33@gmail.com', 'Sistem WFH BPS');
+
+    $this->db->join('alokasi_pekerjaan', 'pegawai.id = alokasi_pekerjaan.nama_pegawai');
+    $data = $this->db->get_where('pegawai', [
+      'alokasi_pekerjaan.id_bekerja' => $id_bekerja
+    ])->row_array();
+    
+    switch ($this->input->post('pilihan')) {
+      case 'selesai':
+        $pesan  = '<div class="alert alert-success">Pekerjaan Selesai</div>
+        Link :' . base_url() . 'pegawai/pekerjaan.html';
+        break;
+      case 'tdak_selesai':
+        $pesan  = '<div class="alert alert-alert">Pekerjaan Belum Selesai</div>
+        Link :' . base_url() . 'pegawai/pekerjaan.html';
+        break;
+      
+      default:
+        # code...
+        break;
+    }
+    $this->email->to($data['email']);
+    $this->email->subject('Notifikasi Pekerjaan Baru');
+    $this->email->message($pesan);
+    $this->email->send();
     $this->session->set_flashdata('pesan', '
       <div class="alert alert-success alert-dismissible fade show" role="alert">
         <strong>Sukses!</strong> Berhasil verifikasi.
