@@ -67,7 +67,9 @@
             <a href="<?= base_url(); ?>tata_usaha/jadwal/generate" class="btn btn-success">Generate Jadwal</a>
             <a href="<?= base_url(); ?>tata_usaha/jadwal/cetak" class="btn btn-success" target="_blank">Cetak</a>
           </div>
-          <div class="card-body">
+          <div class="card-body" style="
+    font-size: 0.5rem;
+">
             <div class="table-responsive">
               <table class="table table-bordered" id="dataTables-example">
                 <thead>

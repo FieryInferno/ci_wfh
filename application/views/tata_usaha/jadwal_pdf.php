@@ -82,7 +82,9 @@
       }
     ?> Tahun 2021
   </font></b></h3>
-  <table class="table table-bordered" id="dataTables-example">
+  <table class="table table-bordered" id="dataTables-example" style="
+    font-size: 0.5rem;
+">
     <thead>
       <tr class="nowrap">
         <th>Nama Pegawai</th>
