@@ -53,6 +53,7 @@ class Pegawai extends CI_Controller {
   public function cetakLaporanHarian()
   {
     $data['laporan_harian'] = $this->LaporanModel->getLaporanHarianByTanggal();
+    $data['kepala_bps']     = $this->db->get_where('pegawai', ['jabatan'  => 'Kepala BPS'])->row_array();
 		ob_start();
       $this->load->view('pegawai/laporanHarianPdf.php', $data);
       $html = ob_get_contents();

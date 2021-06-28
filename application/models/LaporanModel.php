@@ -72,7 +72,8 @@ class LaporanModel extends CI_Model {
   public function getLaporanHarianByTanggal()
   {
     return $this->db->get_where('laporan_pekerjaan', [
-      'tanggal' => $this->input->get('tanggal')
+      'tanggal'                       => $this->input->get('tanggal'),
+      'laporan_pekerjaan.id_pegawai'  => $this->session->id
     ])->result_array();
   }
 }

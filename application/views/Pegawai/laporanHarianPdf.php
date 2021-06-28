@@ -35,7 +35,22 @@
 <script src="<?php echo base_url();?>assets/dist/js/demo.js"></script>
 </head>
 <body>
-  <div class="text-center">LAPORAN PELAKSANAAN TUGAS HARIAN SELAMA PERIODE WORK FROM HOME</div>
+  <div class="text-center">LAPORAN PELAKSANAAN TUGAS HARIAN SELAMA PERIODE 
+    <?php
+      switch ($laporan_harian[0]['jadwal']) {
+        case 'wfh':
+          echo 'WORK FROM HOME';
+          break;
+        case 'wfo':
+          echo 'WORK FROM OFFICE';
+          break;
+        
+        default:
+          # code...
+          break;
+      } 
+    ?>
+  </div>
   <br>
   <div>NAMA : <?= $this->session->nama; ?></div>
   <div>UNIT KERJA : BPS Kabupaten Subang</div>
@@ -115,6 +130,24 @@
         <?php }
       ?>
     </tbody>
+  </table>
+
+  <table width="100%">
+    <tr>
+      <td width="50%">
+        <br>
+        <div class="text-center"><strong>Kepala BPS Kabupaten Subang</strong></div>
+        <br><br><br>
+        <div class="text-center"><strong><u><?= $kepala_bps['nama']; ?></u></strong></div>
+        <div class="text-center">NIP. <?= $kepala_bps['nip']; ?></div>
+      </td>
+      <td width="50%">
+        <div class="text-center">Subang, <?= tgl_indo($this->input->get('tanggal')); ?></div>
+        <br><br><br><br>
+        <div class="text-center"><strong><u><?= $this->session->nama; ?></u></strong></div>
+        <div class="text-center">NIP. <?= $this->session->nip; ?></div>
+      </td>
+    </tr>
   </table>
 </body>
 </html>
