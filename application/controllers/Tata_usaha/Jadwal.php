@@ -17,6 +17,12 @@ class Jadwal extends CI_Controller {
   public function generate()
   {
     if ($this->input->post()) {
+      $tanggalLibur = json_decode(file_get_contents('http://raw.githubusercontent.com/guangrei/Json-Indonesia-holidays/master/calendar.json'), TRUE);
+      // print_r($tanggalLibur);
+      // if (!empty($tanggalLibur['20210817'])) {
+      //   print_r('Hari Kemerdekaan');
+      // }
+      // die();
       $this->M_Jadwal->delete();
       $tahun    = '2021'; //Mengambil tahun saat ini
       $bulan    = $this->input->post('bulan'); //Mengambil bulan saat ini
@@ -28,7 +34,20 @@ class Jadwal extends CI_Controller {
         $jadwal_temp['id_pegawai']  = $key['id'];
         for ($j=1; $j < $tanggal+1; $j++) {
           $nomor        = '`' . $j . '`';
-          if (date('l', strtotime('2021-' . $bulan . '-' . $j)) == 'Sunday' || date('l', strtotime('2021-' . $bulan . '-' . $j)) == 'Saturday') {
+          switch (strlen($j)) {
+            case '1':
+              $z = '0' . $j;
+              break;
+            case '2':
+              $z = $j;
+              break;
+            
+            default:
+              # code...
+              break;
+          }
+          // print_r('2021' . $bulan . $z);echo '<br/>';
+          if (date('l', strtotime('2021-' . $bulan . '-' . $j)) == 'Sunday' || date('l', strtotime('2021-' . $bulan . '-' . $j)) == 'Saturday' ||!empty($tanggalLibur['2021' . $bulan . $z])) {
             $jadwal[$nomor]   = 'libur';
             $jadwal_temp[$j]  = 'libur';
           } else {
@@ -77,6 +96,8 @@ class Jadwal extends CI_Controller {
         }
         $this->M_Jadwal->insert($jadwal);
       }
+      // print_r($jadwal);
+      // die();
       redirect('tata_usaha/jadwal');
     }
 		$data['content']  = 'tata_usaha/generate_jadwal';
@@ -87,7 +108,7 @@ class Jadwal extends CI_Controller {
 	{
     $data['jadwal'] = $this->M_Jadwal->getAll();
 		ob_start();
-      $this->load->view('tata_usaha/jadwal_pdf.php', $data);
+      $this->load->view('tata_usaha/jadwal_pdf', $data);
       $html = ob_get_contents();
     ob_end_clean();
     ob_clean();
