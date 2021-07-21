@@ -121,4 +121,19 @@ class Jadwal extends CI_Controller {
     $dompdf->render();
     $dompdf->stream($filename, array("Attachment" => 0) );
 	}
+
+  public function ubah()
+  {
+    $tanggal  = "`" . $this->input->post('tanggal') . "`";
+    $this->db->update('jadwal', [$tanggal  => $this->input->post('jenis')], ['id_pegawai'  => $this->input->post('id_pegawai')]);
+    $this->session->set_flashdata('pesan', '
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Sukses!</strong> Berhasil edit jadwal.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    ');
+    redirect('tata_usaha/jadwal');
+  }
 }

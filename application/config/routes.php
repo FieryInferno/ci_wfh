@@ -9,6 +9,7 @@ $route['tata_usaha']                  = 'Tata_usaha/Dashboard';
 $route['tata_usaha/jadwal']           = 'Tata_usaha/Jadwal';
 $route['tata_usaha/jadwal/generate']  = 'Tata_usaha/Jadwal/generate';
 $route['tata_usaha/jadwal/cetak']     = 'Tata_usaha/Jadwal/cetak';
+$route['tata_usaha/jadwal/ubah']      = 'Tata_usaha/Jadwal/ubah';
 
 $route['pegawai.html']                    = 'Pegawai/Pegawai';
 $route['pegawai/laporan_harian']          = 'Pegawai/Pegawai/laporan_harian';

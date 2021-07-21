@@ -22,16 +22,16 @@ class Pekerjaan extends CI_Controller {
     $awal  = date_create($this->input->post('tanggal'));
     $akhir = date_create();
     $diff  = date_diff( $awal, $akhir );
-    if ($diff->days >= 1) {
-      $this->session->set_flashdata('pesan', '
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-          <strong>Gagal!</strong> melewati tanggal alokasi.
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-      ');
-    } else {
+    // if ($diff->days >= 1) {
+    //   $this->session->set_flashdata('pesan', '
+    //     <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    //       <strong>Gagal!</strong> melewati tanggal alokasi.
+    //       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    //         <span aria-hidden="true">&times;</span>
+    //       </button>
+    //     </div>
+    //   ');
+    // } else {
       if ($_FILES['hasil']) {
         $config['upload_path']    = './assets/file_pekerjaan/';
         $config['allowed_types']  = 'docx|xls|pdf';
@@ -96,7 +96,7 @@ class Pekerjaan extends CI_Controller {
           </div>
         ');
       }
-    }
+    // }
     redirect('pegawai/pekerjaan/lihat/' . $this->input->post('id_bekerja'));
   }
 }

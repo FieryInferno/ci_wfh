@@ -67,10 +67,9 @@
             <a href="<?= base_url(); ?>tata_usaha/jadwal/generate" class="btn btn-success">Generate Jadwal</a>
             <a href="<?= base_url(); ?>tata_usaha/jadwal/cetak" class="btn btn-success" target="_blank">Cetak</a>
           </div>
-          <div class="card-body" style="
-    font-size: 0.5rem;
-">
+          <div class="card-body" style="font-size: 0.5rem;">
             <div class="table-responsive">
+              <?= $this->session->pesan ? $this->session->pesan : ''; ?> 
               <table class="table table-bordered" id="dataTables-example">
                 <thead>
                   <tr class="nowrap">
@@ -129,7 +128,41 @@
                                     echo 'class="bg-dark"';
                                     break;
                                 }
-                              ?>><?= $key[$i]; ?></td>
+                              ?>>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#ubah<?= $i; ?>"><i class="fas fa-edit"></i></button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="ubah<?= $i; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Ubah Tanggal</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                      </div>
+                                      <form action="<?= base_url('tata_usaha/jadwal/ubah'); ?>" method="post">
+                                        <div class="modal-body">
+                                          <div class="form-group">
+                                            <input type="hidden" value="<?= $key['id_pegawai']; ?>" name="id_pegawai">
+                                            <input type="hidden" value="<?= $i; ?>" name="tanggal">
+                                            <select class="form-control" name="jenis">
+                                              <option value="wfh" <?= $key[$i] == 'wfh' ? 'selected' : '' ; ?>>WFH</option>
+                                              <option value="wfo" <?= $key[$i] == 'wfo' ? 'selected' : '' ; ?>>WFO</option>
+                                              <option value="libur" <?= $key[$i] == 'libur' ? 'selected' : '' ; ?>>Libur</option>
+                                            </select>
+                                          </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                          <button type="submit" class="btn btn-warning">Ubah</button>
+                                        </div>
+                                      </form>
+                                    </div>
+                                  </div>
+                                </div>
+                              </td>
                           <?php }
                         ?>
                       </tr>
